@@ -25,23 +25,23 @@ const Footer = () => {
               </h3>
               <ul className="space-y-1">
                 <li>
-                  <Link rel="noopener noreferrer" href="#">
-                    Features
+                  <Link to="/honda" rel="noopener noreferrer" href="#">
+                    Honda
                   </Link>
                 </li>
                 <li>
-                  <Link rel="noopener noreferrer" href="#">
-                    Integrations
+                  <Link to="/bmw" rel="noopener noreferrer" href="#">
+                    BMW
                   </Link>
                 </li>
                 <li>
-                  <Link rel="noopener noreferrer" href="#">
-                    Pricing
+                  <Link to="/yamaha" rel="noopener noreferrer" href="#">
+                    Yamaha
                   </Link>
                 </li>
                 <li>
-                  <Link rel="noopener noreferrer" href="#">
-                    FAQ
+                  <Link to="/mvagusta" rel="noopener noreferrer" href="#">
+                    MV Agusta
                   </Link>
                 </li>
               </ul>
@@ -54,37 +54,22 @@ const Footer = () => {
               </h3>
               <ul className="space-y-1">
                 <li>
-                  <Link rel="noopener noreferrer" href="#">
-                    Privacy
+                  <Link to="/home" rel="noopener noreferrer" href="#">
+                    Home
                   </Link>
                 </li>
                 <li>
-                  <Link rel="noopener noreferrer" href="#">
-                    Terms of Service
+                  <Link to="/blogs" rel="noopener noreferrer" href="#">
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" rel="noopener noreferrer" href="#">
+                    Contact
                   </Link>
                 </li>
               </ul>
             </div>
-            {/* <div className="space-y-3">
-              <h3 className="uppercase text-black font-semibold">Developers</h3>
-              <ul className="space-y-1">
-                <li>
-                  <Link rel="noopener noreferrer" href="#">
-                    Public API
-                  </Link>
-                </li>
-                <li>
-                  <Link rel="noopener noreferrer" href="#">
-                    Documentation
-                  </Link>
-                </li>
-                <li>
-                  <Link rel="noopener noreferrer" href="#">
-                    Guides
-                  </Link>
-                </li>
-              </ul>
-            </div> */}
 
             {/* social icons */}
             <div className="space-y-3">

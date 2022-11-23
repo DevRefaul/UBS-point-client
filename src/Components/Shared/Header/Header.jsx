@@ -11,7 +11,7 @@ to="/"
 */
 
 const Header = () => {
-  const menuItems = ["home", "prodcuts", "dashboard"];
+  const menuItems = ["home", "blog", "contact"];
 
   return (
     <div className=" bg-slate-100 sticky top-0 py-1">
