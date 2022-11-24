@@ -32,7 +32,7 @@ const Slider = () => {
   ];
 
   return (
-    <div className="w-[80%] mx-auto my-10">
+    <div className="md:w-[80%] mx-auto mb-10">
       <Splide
         aria-label="My Favorite Images"
         options={{
@@ -50,8 +50,8 @@ const Slider = () => {
                 className="w-full h-[80vh] object-cover"
               />
             </div>
-            <div className="w-[50%] mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <h2 className="text-5xl font-bold text-gray-100 text-center leading-relaxed">
+            <div className="md:w-[50%] mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <h2 className="text-xl xl:text-5xl font-bold text-gray-100 text-center leading-relaxed">
                 {slide.text}
               </h2>
               <div className="flex justify-center my-4">

@@ -4,7 +4,7 @@ const ForBuyer = () => {
   return (
     <>
       <p className="text-xl font-semibold text-center text-green-500">Buyer</p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 justify-center gap-6 mt-12">
         {/* first card */}
         <div className="card w-full bg-base-100 shadow-xl my-4">
           <div className="card-body relative">

@@ -15,14 +15,14 @@ const ClientFeedback = () => {
     {
       reviewer: "Bill Gates",
       message:
-        "BikeFair is a great tool to sell a couple of our bikes every day - a big difference-maker for us! They take care of the marketing, customer support, and do everything we ask for and more, so we can focus on our own thing.",
+        "USB Point is a great tool to sell a couple of our bikes every day - a big difference-maker for us! They take care of the marketing, customer support, and do everything we ask for and more, so we can focus on our own thing.",
       rating: 4.5,
       image:
         "https://image.cnbcfm.com/api/v1/image/104891709-Bill_Gates_the_co-Founder.jpg?v=1558120888",
     },
     {
       reviewer: "Kim",
-      message: "Thank you BikeFair for your help. So happy with my bike!",
+      message: "Thank you USB Point for your help. So happy with my bike!",
       rating: 4.1,
       image:
         "https://t4.ftcdn.net/jpg/02/87/35/99/360_F_287359914_HU3P7rhmyJMyyhBBcILcWd2S7DDwkJSs.jpg",
