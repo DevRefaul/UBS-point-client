@@ -1,3 +1,4 @@
+import SingleBikeFullInfo from "../Components/SingleBikeFullInfo/SingleBikeFullInfo";
 import Blog from "../Pages/Blog/Blog";
 import Contact from "../Pages/Contact/Contact";
 import Error from "../Pages/Error/Error";
@@ -32,7 +33,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "/honda/:id",
-        element: <Honda />,
+        element: <SingleBikeFullInfo />,
       },
       {
         path: "/bmw",
@@ -40,15 +41,15 @@ const routes = createBrowserRouter([
       },
       {
         path: "/bmw/:id",
-        element: <BMW />,
+        element: <SingleBikeFullInfo />,
       },
       {
         path: "/mvagusta",
         element: <MVAgusta />,
       },
       {
-        path: "/mvagusta/:id",
-        element: <MVAgusta />,
+        path: "/mv/:id",
+        element: <SingleBikeFullInfo />,
       },
       {
         path: "/yamaha",
@@ -56,7 +57,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "/yamaha/:id",
-        element: <Yamaha />,
+        element: <SingleBikeFullInfo />,
       },
       {
         path: "/blog",
