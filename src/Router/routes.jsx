@@ -76,32 +76,32 @@ const routes = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/dashboard",
-    children: [
-      {
-        path: "/profile",
-      },
-      {
-        path: "/myorders",
-      },
-      {
-        path: "/addproduct",
-      },
-      {
-        path: "/manageproduct",
-      },
-      {
-        path: "/alluser",
-      },
-      {
-        path: "/allseller",
-      },
-      {
-        path: "/reportedproducts",
-      },
-    ],
-  },
+  // {
+  //   path: "/dashboard",
+  //   children: [
+  //     {
+  //       path: "/profile",
+  //     },
+  //     {
+  //       path: "/myorders",
+  //     },
+  //     {
+  //       path: "/addproduct",
+  //     },
+  //     {
+  //       path: "/manageproduct",
+  //     },
+  //     {
+  //       path: "/alluser",
+  //     },
+  //     {
+  //       path: "/allseller",
+  //     },
+  //     {
+  //       path: "/reportedproducts",
+  //     },
+  //   ],
+  // },
 ]);
 
 export default routes;

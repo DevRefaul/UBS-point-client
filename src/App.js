@@ -2,12 +2,18 @@ import { RouterProvider } from "react-router-dom";
 import routes from "./Router/routes";
 import '@splidejs/react-splide/css';
 import { Toaster } from "react-hot-toast";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
     <div>
+      <QueryClientProvider client={queryClient}>
       <RouterProvider router={routes} />
       <Toaster />
+      </QueryClientProvider>
     </div>
   );
 }
