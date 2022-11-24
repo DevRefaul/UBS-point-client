@@ -14,7 +14,7 @@ const Header = () => {
   const menuItems = ["home", "blog", "contact"];
 
   return (
-    <div className=" bg-slate-100 sticky top-0 py-1">
+    <div className=" bg-slate-100 sticky top-0 py-1 z-50">
       <div className="navbar w-[90%] md:w-[80%] mx-auto ">
         <div className="navbar-start">
           <div className="dropdown">
