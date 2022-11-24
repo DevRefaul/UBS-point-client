@@ -7,16 +7,16 @@ import "./slider.css";
 const Slider = () => {
   return (
     <div className="w-[80%] mx-auto">
-      <Splide aria-label="My Favorite Images">
+      {/* <Splide aria-label="My Favorite Images">
         <SplideSlide>
-          {/* <div className="imageOverlay">
+          <div className="imageOverlay">
             <img src={honda} alt="" className="w-full h-[80vh] object-cover" />
-          </div> */}
+          </div>
         </SplideSlide>
         <SplideSlide>
-          {/* <img src={bmw} alt="" className="w-full h-[80vh] object-cover" /> */}
+          <img src={bmw} alt="" className="w-full h-[80vh] object-cover" />
         </SplideSlide>
-      </Splide>
+      </Splide> */}
     </div>
   );
 };
