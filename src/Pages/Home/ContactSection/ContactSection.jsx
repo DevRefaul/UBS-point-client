@@ -11,7 +11,7 @@ const Contact = () => {
       <div>
         <p className="text-lg font-semibold">
           Facing Problem Buying Bike{" "}
-          <button className="px-6 py-2 bg-green-400 text-white rounded ml-4">
+          <button className="px-6 py-2 bg-green-400 text-white rounded ml-4 border-2 border-transparent hover:bg-white hover:text-green-500 hover:border-green-500">
             <Link to="/contact">Contact us</Link>
           </button>
         </p>
