@@ -4,6 +4,7 @@ import { MdCheckCircle } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Error from "../../Pages/Error/Error";
 import Loading from "../Loading/Loading";
+import BookingModal from "./BookingModal";
 import "./singleBikeInfo.css";
 
 const SingleBikeFullInfo = () => {
@@ -64,7 +65,7 @@ const SingleBikeFullInfo = () => {
       <div className="my-4">
         <img src={image} alt="" className="w-[50%]" />
       </div>
-      <p className="para">Total Run : {totalKiloRun}k</p>
+      <p className="para">Total Run : {totalKiloRun} km</p>
       <p className="para">Used : {used}</p>
       <p className="para">Condition : {condition}</p>
 
@@ -74,10 +75,16 @@ const SingleBikeFullInfo = () => {
       <h4 className="text-xl font-bold mt-2">Buying Price : ${buyingPrice}</h4>
       <h4 className="text-xl font-bold mb-2">Asking Price : ${askingPrice}</h4>
       <div className="mt-6">
-        <button className="px-6 py-2 bg-green-400 text-white font-bold rounded border-2 border-transparent hover:bg-white hover:text-green-500 hover:border-green-500">
+        {/* booking modal */}
+        <label
+          htmlFor="bookingModal"
+          className="px-6 py-2 bg-green-400 text-white font-bold rounded border-2 border-transparent hover:bg-white hover:text-green-500 hover:border-green-500 cursor-pointer"
+        >
           Book Now!!!
-        </button>
+        </label>
         <span className="mx-4"></span>
+
+        {/* go back btn */}
         <button
           onClick={() => navigate(-1)}
           className="px-6 py-2 bg-orange-400 text-white font-bold rounded md:ml-4 border-2 border-transparent hover:bg-white hover:text-orange-500 hover:border-orange-500"
@@ -85,6 +92,8 @@ const SingleBikeFullInfo = () => {
           Choose Another Bike
         </button>
       </div>
+
+      <BookingModal bike={data.bike} />
     </div>
   );
 };
