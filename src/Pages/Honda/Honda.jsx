@@ -9,7 +9,7 @@ const Honda = () => {
     queryKey: ["honda"],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/bikes?brand=honda");
-      const data = res.json();
+      const data = await res.json();
       return data;
     },
   });

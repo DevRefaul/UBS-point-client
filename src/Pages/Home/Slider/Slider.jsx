@@ -42,7 +42,7 @@ const Slider = () => {
         }}
       >
         {slidersInfo.map((slide, idx) => (
-          <SplideSlide className="relative">
+          <SplideSlide key={idx} className="relative">
             <div className="imageOverlay">
               <img
                 src={slide.image}
