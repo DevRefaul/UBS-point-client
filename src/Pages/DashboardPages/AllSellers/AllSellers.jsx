@@ -1,10 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import Loading from "../../../Components/Loading/Loading";
+import AuthContext from "../../../Contexts/Auth/AuthContext";
 import Error from "../../Error/Error";
 
 const AllSellers = () => {
+  const { handleDeleteUser } = useContext(AuthContext);
+
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["seller"],
     queryFn: async () => {
@@ -32,6 +35,7 @@ const AllSellers = () => {
 
     if (data.deleteUser.deletedCount) {
       toast.success("Successfully Deleted User");
+      handleDeleteUser();
       refetch();
     } else {
       toast.error(data.message);
