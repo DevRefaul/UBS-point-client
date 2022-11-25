@@ -8,7 +8,6 @@ const Login = () => {
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
-  console.log(from);
 
   // state to to store email
   const [email, setEmail] = useState("");

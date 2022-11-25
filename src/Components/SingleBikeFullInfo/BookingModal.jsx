@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MdCheckCircle } from "react-icons/md";
+import { Authentication } from "../../Contexts/Auth/AuthContext";
 
 const BookingModal = ({ bike }) => {
   const { bikeName, askingPrice, contact, sellerName, sellerVerified } = bike;
+  const { user } = useContext(Authentication);
 
   return (
     <>
@@ -35,14 +37,16 @@ const BookingModal = ({ bike }) => {
               type="text"
               name="name"
               id="name"
-              placeholder="Your Name"
+              disabled
+              defaultValue={user.displayName}
               className="w-full border-2 py-2 px-1 rounded my-1"
             />
             <input
               type="email"
               name="email"
               id="email"
-              placeholder="Your Name"
+              disabled
+              defaultValue={user.email}
               className="w-full border-2 py-2 px-1 rounded my-1"
             />
             <input

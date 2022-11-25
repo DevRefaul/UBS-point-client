@@ -76,9 +76,9 @@ const AuthContext = ({ children }) => {
   };
 
   // handleUpdateUser
-  const handleUpdateUserInfo = () => {
+  const handleUpdateUserInfo = (name) => {
     setLoading(true);
-    return updateProfile(user);
+    return updateProfile(auth.currentUser, { displayName: name });
   };
 
   // handle sign out

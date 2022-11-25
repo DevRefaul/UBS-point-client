@@ -1,15 +1,20 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Authentication } from "../../Contexts/Auth/AuthContext";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+
   // login functions from contxt
   const {
     handleCreateUser,
     handleGoogleSignIn,
     handleFacebookSignIn,
     handleGithubSignIn,
+    handleUpdateUserInfo,
   } = useContext(Authentication);
 
   // handle register
@@ -27,7 +32,12 @@ const Register = () => {
       .then((data) => {
         const user = data.user;
         if (user?.uid) {
-          toast.success("Successfully Created User");
+          handleUpdateUserInfo(name)
+            .then(() => {
+              navigate(from, { replace: true });
+              toast.success("Successfully Created User");
+            })
+            .catch((err) => console.error(err.message));
         }
       })
       .catch((err) => console.error(err.message));
