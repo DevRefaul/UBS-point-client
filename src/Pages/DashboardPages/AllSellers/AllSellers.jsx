@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import toast from "react-hot-toast";
 import Loading from "../../../Components/Loading/Loading";
 import Error from "../../Error/Error";
 
 const AllSellers = () => {
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["seller"],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/sellers");
@@ -22,6 +23,20 @@ const AllSellers = () => {
   }
 
   const sellers = data.sellers;
+
+  const handleDeleteSeller = async (id) => {
+    const res = await fetch(`http://localhost:5000/deleteuser/${id}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+
+    if (data.deleteUser.deletedCount) {
+      toast.success("Successfully Deleted User");
+      refetch();
+    } else {
+      toast.error(data.message);
+    }
+  };
 
   return (
     <div className="w-[98%] mx-auto">
@@ -52,7 +67,10 @@ const AllSellers = () => {
                   <td>{seller.role}</td>
                   <td>{seller.verified}</td>
                   <td className="flex justify-center">
-                    <button className="btn btn-sm btn-secondary">
+                    <button
+                      onClick={() => handleDeleteSeller(seller._id)}
+                      className="btn btn-sm btn-secondary"
+                    >
                       Delete Seller
                     </button>
                   </td>

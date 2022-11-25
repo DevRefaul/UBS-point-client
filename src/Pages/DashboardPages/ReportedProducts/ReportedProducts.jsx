@@ -44,7 +44,9 @@ const ReportedProducts = () => {
 
   return (
     <div className="w-[98%] mx-auto">
-      <h2 className="text-3xl font-semibold text-center py-4">All Buyers</h2>
+      <h2 className="text-3xl font-semibold text-center py-4">
+        All Reported Posts
+      </h2>
 
       {/* table start */}
       <div className="overflow-x-auto">
