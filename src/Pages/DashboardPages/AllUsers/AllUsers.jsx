@@ -2,11 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import Loading from "../../../Components/Loading/Loading";
-import AuthContext from "../../../Contexts/Auth/AuthContext";
+import { Authentication } from "../../../Contexts/Auth/AuthContext";
 import Error from "../../Error/Error";
 
 const AllUsers = () => {
-  const { handleDeleteUser } = useContext(AuthContext);
+  const { handleDeleteUser } = useContext(Authentication);
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["buyer"],

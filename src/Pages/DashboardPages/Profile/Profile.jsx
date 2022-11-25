@@ -13,11 +13,24 @@ const Profile = () => {
     handleUpdateUserInfo(userInfo)
       .then(() => {
         setLoading(false);
+        handleUpdateUserInDB(name);
         toast.success("Profile Updated Successfully");
       })
       .catch((err) => console.error(err.message));
 
     form.reset();
+  };
+
+  const handleUpdateUserInDB = async (name) => {
+    const userInfo = { email: user.email, name };
+
+    const res = await fetch("http://localhost:5000/updatename", {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(userInfo),
+    });
+    const data = await res.json();
+    console.log(data);
   };
 
   return (

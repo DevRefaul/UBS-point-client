@@ -92,7 +92,7 @@ const AuthContext = ({ children }) => {
 
   // delete user
   const handleDeleteUser = () => {
-    return deleteUser(user);
+    return deleteUser(auth.currentUser);
   };
 
   // observer
