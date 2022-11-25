@@ -5,10 +5,12 @@ import Loading from "../Components/Loading/Loading";
 import { Authentication } from "../Contexts/Auth/AuthContext";
 import Error from "../Pages/Error/Error";
 
-const AdminRoute = ({ children }) => {
+const SellerRoute = ({ children }) => {
   const { user, handleSignOut } = useContext(Authentication);
 
   const userEmail = user?.email;
+
+  // passing email to server
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["email"],
@@ -29,7 +31,7 @@ const AdminRoute = ({ children }) => {
   const userInfo = data;
   const { role } = userInfo.result;
 
-  if (role !== "admin") {
+  if (role !== "seller") {
     handleSignOut();
     return <Navigate to="/login" />;
   }
@@ -37,4 +39,4 @@ const AdminRoute = ({ children }) => {
   return children;
 };
 
-export default AdminRoute;
+export default SellerRoute;

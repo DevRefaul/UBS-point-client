@@ -21,6 +21,7 @@ import Register from "../Pages/Register/Register";
 import Yamaha from "../Pages/Yamaha/Yamaha";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Root from "../Root/Root";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -125,11 +126,19 @@ const routes = createBrowserRouter([
       },
       {
         path: "/dashboard/addproduct",
-        element: <AddProduct />,
+        element: (
+          <SellerRoute>
+            <AddProduct />
+          </SellerRoute>
+        ),
       },
       {
         path: "/dashboard/manageproduct",
-        element: <ManageProduct />,
+        element: (
+          <SellerRoute>
+            <ManageProduct />
+          </SellerRoute>
+        ),
       },
       {
         path: "/dashboard/verifyseller",

@@ -9,7 +9,7 @@ const Yamaha = () => {
     queryKey: ["yamaha"],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/bikes?brand=yamaha");
-      const data = res.json();
+      const data = await res.json();
       return data;
     },
   });

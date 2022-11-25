@@ -1,9 +1,42 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import Loading from "../../../Components/Loading/Loading";
 import Footer from "../../../Components/Shared/Footer/Footer";
 import Header from "../../../Components/Shared/Header/Header";
+import { Authentication } from "../../../Contexts/Auth/AuthContext";
+import Error from "../../Error/Error";
 
 const Dashboard = () => {
+  const { user } = useContext(Authentication);
+
+  const userEmail = user?.email;
+
+  // passing email to server
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["email"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/user?email=${userEmail}`);
+      const data = await res.json();
+      return data;
+    },
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <Error />;
+  }
+
+  const userInfo = data;
+  const { role } = userInfo.result;
+
+  const admin = role === "admin";
+  const seller = role === "seller";
+  const buyer = role === "buyer";
+
   return (
     <>
       <Header />
@@ -57,17 +90,23 @@ const Dashboard = () => {
                   Profile
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to="/dashboard/mybookings"
-                  style={({ isActive }) => ({
-                    color: isActive ? "#fff" : "",
-                    background: isActive ? "#21C473" : "",
-                  })}
-                >
-                  My Bookings
-                </NavLink>
-              </li>
+
+              {/* conditional rendering for buyer start */}
+              {buyer && (
+                <li>
+                  <NavLink
+                    to="/dashboard/mybookings"
+                    style={({ isActive }) => ({
+                      color: isActive ? "#fff" : "",
+                      background: isActive ? "#21C473" : "",
+                    })}
+                  >
+                    My Bookings
+                  </NavLink>
+                </li>
+              )}
+              {/* conditional rendering for buyer end */}
+
               <li>
                 <NavLink
                   to="/dashboard/addproduct"
@@ -145,104 +184,102 @@ const Dashboard = () => {
 
 export default Dashboard;
 
+// {
+//   /* <div className="h-screen bg-green-100 hidden lg:block">
+//   <ul className="menu p-4 w-full font-bold text-lg text-black">
+//     <li>
+//       <NavLink
+//         to="/dashboard/profile"
+//         style={({ isActive }) => ({
+//           color: isActive ? "#fff" : "",
+//           background: isActive ? "#21C473" : "",
+//         })}
+//       >
+//         Profile
+//       </NavLink>
+//     </li>
+//     <li>
+//       <NavLink
+//         to="/dashboard/mybookings"
+//         style={({ isActive }) => ({
+//           color: isActive ? "#fff" : "",
+//           background: isActive ? "#21C473" : "",
+//         })}
+//       >
+//         My Bookings
+//       </NavLink>
+//     </li>
+//     <li>
+//       <NavLink
+//         to="/dashboard/addproduct"
+//         style={({ isActive }) => ({
+//           color: isActive ? "#fff" : "",
+//           background: isActive ? "#21C473" : "",
+//         })}
+//       >
+//         Add Bike
+//       </NavLink>
+//     </li>
+//     <li>
+//       <NavLink
+//         to="/dashboard/manageproduct"
+//         style={({ isActive }) => ({
+//           color: isActive ? "#fff" : "",
+//           background: isActive ? "#21C473" : "",
+//         })}
+//       >
+//         Manage Products
+//       </NavLink>
+//     </li>
+//     <li>
+//       <NavLink
+//         to="/dashboard/verifyseller"
+//         style={({ isActive }) => ({
+//           color: isActive ? "#fff" : "",
+//           background: isActive ? "#21C473" : "",
+//         })}
+//       >
+//         Apply Verify
+//       </NavLink>
+//     </li>
+//     <li>
+//       <NavLink
+//         to="/dashboard/allbuyers"
+//         style={({ isActive }) => ({
+//           color: isActive ? "#fff" : "",
+//           background: isActive ? "#21C473" : "",
+//         })}
+//       >
+//         All Users
+//       </NavLink>
+//     </li>
+//     <li>
+//       <NavLink
+//         to="/dashboard/allsellers"
+//         style={({ isActive }) => ({
+//           color: isActive ? "#fff" : "",
+//           background: isActive ? "#21C473" : "",
+//         })}
+//       >
+//         All Sellers
+//       </NavLink>
+//     </li>
+//     <li>
+//       <NavLink
+//         to="/dashboard/reportedproducts"
+//         style={({ isActive }) => ({
+//           color: isActive ? "#fff" : "",
+//           background: isActive ? "#21C473" : "",
+//         })}
+//       >
+//         Reported Products
+//       </NavLink>
+//     </li>
+//   </ul>
+// </div> */
+// }
 
-        // {
-        //   /* <div className="h-screen bg-green-100 hidden lg:block">
-        //   <ul className="menu p-4 w-full font-bold text-lg text-black">
-        //     <li>
-        //       <NavLink
-        //         to="/dashboard/profile"
-        //         style={({ isActive }) => ({
-        //           color: isActive ? "#fff" : "",
-        //           background: isActive ? "#21C473" : "",
-        //         })}
-        //       >
-        //         Profile
-        //       </NavLink>
-        //     </li>
-        //     <li>
-        //       <NavLink
-        //         to="/dashboard/mybookings"
-        //         style={({ isActive }) => ({
-        //           color: isActive ? "#fff" : "",
-        //           background: isActive ? "#21C473" : "",
-        //         })}
-        //       >
-        //         My Bookings
-        //       </NavLink>
-        //     </li>
-        //     <li>
-        //       <NavLink
-        //         to="/dashboard/addproduct"
-        //         style={({ isActive }) => ({
-        //           color: isActive ? "#fff" : "",
-        //           background: isActive ? "#21C473" : "",
-        //         })}
-        //       >
-        //         Add Bike
-        //       </NavLink>
-        //     </li>
-        //     <li>
-        //       <NavLink
-        //         to="/dashboard/manageproduct"
-        //         style={({ isActive }) => ({
-        //           color: isActive ? "#fff" : "",
-        //           background: isActive ? "#21C473" : "",
-        //         })}
-        //       >
-        //         Manage Products
-        //       </NavLink>
-        //     </li>
-        //     <li>
-        //       <NavLink
-        //         to="/dashboard/verifyseller"
-        //         style={({ isActive }) => ({
-        //           color: isActive ? "#fff" : "",
-        //           background: isActive ? "#21C473" : "",
-        //         })}
-        //       >
-        //         Apply Verify
-        //       </NavLink>
-        //     </li>
-        //     <li>
-        //       <NavLink
-        //         to="/dashboard/allbuyers"
-        //         style={({ isActive }) => ({
-        //           color: isActive ? "#fff" : "",
-        //           background: isActive ? "#21C473" : "",
-        //         })}
-        //       >
-        //         All Users
-        //       </NavLink>
-        //     </li>
-        //     <li>
-        //       <NavLink
-        //         to="/dashboard/allsellers"
-        //         style={({ isActive }) => ({
-        //           color: isActive ? "#fff" : "",
-        //           background: isActive ? "#21C473" : "",
-        //         })}
-        //       >
-        //         All Sellers
-        //       </NavLink>
-        //     </li>
-        //     <li>
-        //       <NavLink
-        //         to="/dashboard/reportedproducts"
-        //         style={({ isActive }) => ({
-        //           color: isActive ? "#fff" : "",
-        //           background: isActive ? "#21C473" : "",
-        //         })}
-        //       >
-        //         Reported Products
-        //       </NavLink>
-        //     </li>
-        //   </ul>
-        // </div> */
-        // } 
-
-        
-        /* 
+/* 
                 // { dashboard navigations for big screen }
         <div className="h-screen bg-green-100 hidden lg:block">
           <ul className="menu p-4 w-full font-bold text-lg text-black">
