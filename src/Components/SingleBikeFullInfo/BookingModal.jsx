@@ -47,7 +47,7 @@ const BookingModal = ({ bike }) => {
                 )}
               </span>
             </p>
-            <h4 className="font-bold">Price : {askingPrice}</h4>
+            <h4 className="font-bold">Price : ${askingPrice}</h4>
             <p>Seller Number : {contact}</p>
 
             <div className="divider"></div>

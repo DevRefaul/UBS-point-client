@@ -49,9 +49,13 @@ const Header = () => {
               ))}
             </ul>
           </div>
-          <NavLink className="">
-            <img src={logo} alt="" className="max-w-[9rem] md:max-w-1/2" />
+
+          {/* logo  start*/}
+          <NavLink className="" to="/">
+            <img src={logo} alt="" className="max-w-[7rem] md:max-w-1/2" />
           </NavLink>
+
+          {/* logo end */}
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0 font-semibold">
@@ -71,7 +75,7 @@ const Header = () => {
             ))}
           </ul>
         </div>
-        <div className="navbar-end hidden md:flex">
+        <div className="navbar-end flex">
           {!user ? (
             <>
               <Link

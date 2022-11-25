@@ -1,6 +1,15 @@
 import SingleBikeFullInfo from "../Components/SingleBikeFullInfo/SingleBikeFullInfo";
 import Blog from "../Pages/Blog/Blog";
 import Contact from "../Pages/Contact/Contact";
+import AddProduct from "../Pages/DashboardPages/AddProduct/AddProduct";
+import AllSellers from "../Pages/DashboardPages/AllSellers/AllSellers";
+import AllUsers from "../Pages/DashboardPages/AllUsers/AllUsers";
+import Dashboard from "../Pages/DashboardPages/Dashboard/Dashboard";
+import ManageProduct from "../Pages/DashboardPages/ManageProduct/ManageProduct";
+import MyBookings from "../Pages/DashboardPages/MyBookings/MyBookings";
+import Profile from "../Pages/DashboardPages/Profile/Profile";
+import ReportedProducts from "../Pages/DashboardPages/ReportedProducts/ReportedProducts";
+import VerifySeller from "../Pages/DashboardPages/VerifySeller/VerifySeller";
 import Error from "../Pages/Error/Error";
 import BMW from "../Pages/Home/BMW/BMW";
 import Home from "../Pages/Home/Home";
@@ -94,32 +103,47 @@ const routes = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path: "/dashboard",
-  //   children: [
-  //     {
-  //       path: "/profile",
-  //     },
-  //     {
-  //       path: "/myorders",
-  //     },
-  //     {
-  //       path: "/addproduct",
-  //     },
-  //     {
-  //       path: "/manageproduct",
-  //     },
-  //     {
-  //       path: "/alluser",
-  //     },
-  //     {
-  //       path: "/allseller",
-  //     },
-  //     {
-  //       path: "/reportedproducts",
-  //     },
-  //   ],
-  // },
+
+  // routes for dashboard
+
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "/dashboard/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/dashboard/mybookings",
+        element: <MyBookings />,
+      },
+      {
+        path: "/dashboard/addproduct",
+        element: <AddProduct />,
+      },
+      {
+        path: "/dashboard/manageproduct",
+        element: <ManageProduct />,
+      },
+      {
+        path: "/dashboard/verifyseller",
+        element: <VerifySeller />,
+      },
+      {
+        path: "/dashboard/allbuyers",
+        element: <AllUsers />,
+      },
+      {
+        path: "/dashboard/allsellers",
+        element: <AllSellers />,
+      },
+      {
+        path: "/dashboard/reportedproducts",
+        element: <ReportedProducts />,
+      },
+    ],
+  },
 ]);
 
 export default routes;
