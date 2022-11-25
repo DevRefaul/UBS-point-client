@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
 import { MdCheckCircle } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { Authentication } from "../../Contexts/Auth/AuthContext";
 import Error from "../../Pages/Error/Error";
 import Loading from "../Loading/Loading";
 import BookingModal from "./BookingModal";
@@ -11,7 +12,11 @@ const SingleBikeFullInfo = () => {
   const id = window.location.pathname.split("/")[2];
   const navigate = useNavigate();
 
-  const { data, isLoading, error } = useQuery({
+  const {
+    data: singleBike,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["brand"],
     queryFn: async () => {
       if (!id) {
@@ -23,6 +28,27 @@ const SingleBikeFullInfo = () => {
     },
   });
 
+  // fetching user infos for conditional rendering
+  const { user } = useContext(Authentication);
+
+  const userEmail = user?.email;
+
+  // passing email to server
+
+  const {
+    data,
+    isLoading: userLoaing,
+    error: userError,
+  } = useQuery({
+    queryKey: ["email"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/user?email=${userEmail}`);
+      const data = await res.json();
+      return data;
+    },
+  });
+
+  // loading and error state for loading bike data
   if (isLoading) {
     return <Loading />;
   }
@@ -45,7 +71,21 @@ const SingleBikeFullInfo = () => {
     sellerVerified,
     totalKiloRun,
     used,
-  } = data.bike;
+  } = singleBike.bike;
+
+  // loading and error state for loading user data
+  if (userLoaing) {
+    return <Loading />;
+  }
+  if (userError) {
+    return <Error />;
+  }
+
+  const userInfo = data;
+  const { role } = userInfo.result;
+
+  const buyer = role === "buyer";
+  const seller = role === "seller";
 
   return (
     <div className="w-[90%] md:w-[80%] mx-auto my-10 py-4">
@@ -74,26 +114,35 @@ const SingleBikeFullInfo = () => {
       <p className="para">About Bike : {description}</p>
       <h4 className="text-xl font-bold mt-2">Buying Price : ${buyingPrice}</h4>
       <h4 className="text-xl font-bold mb-2">Asking Price : ${askingPrice}</h4>
-      <div className="mt-6">
-        {/* booking modal */}
-        <label
-          htmlFor="bookingModal"
-          className="px-6 py-2 bg-green-400 text-white font-bold rounded border-2 border-transparent hover:bg-white hover:text-green-500 hover:border-green-500 cursor-pointer"
-        >
-          Book Now!!!
-        </label>
-        <span className="mx-4"></span>
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* conditional rendering so that seller can't buy product */}
+        {!seller && (
+          <>
+            {/* booking modal */}
+            <label
+              htmlFor="bookingModal"
+              className="text-center px-6 py-2 bg-green-400 text-white font-bold rounded border-2 border-transparent hover:bg-white hover:text-green-500 hover:border-green-500 cursor-pointer"
+            >
+              Book Now!!!
+            </label>
 
-        {/* go back btn */}
-        <button
-          onClick={() => navigate(-1)}
-          className="px-6 py-2 bg-orange-400 text-white font-bold rounded md:ml-4 border-2 border-transparent hover:bg-white hover:text-orange-500 hover:border-orange-500"
-        >
-          Choose Another Bike
-        </button>
+            {/* go back btn */}
+            <button
+              onClick={() => navigate(-1)}
+              className=" px-6 py-2 bg-orange-400 text-white font-bold rounded md:ml-4 border-2 border-transparent hover:bg-white hover:text-orange-500 hover:border-orange-500"
+            >
+              Choose Another Bike
+            </button>
+
+            {/* report to admin btn */}
+            <button className=" px-6 py-2 bg-red-400 text-white font-bold rounded md:ml-4 border-2 border-transparent hover:bg-white hover:text-red-500 hover:border-red-500">
+              Report to admin
+            </button>
+          </>
+        )}
       </div>
 
-      <BookingModal bike={data.bike} />
+      <BookingModal bike={singleBike.bike} />
     </div>
   );
 };

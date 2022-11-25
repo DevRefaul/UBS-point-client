@@ -31,7 +31,7 @@ const Dashboard = () => {
   }
 
   const userInfo = data;
-  const { role } = userInfo.result;
+  const { role } = userInfo?.result;
 
   const admin = role === "admin";
   const seller = role === "seller";
