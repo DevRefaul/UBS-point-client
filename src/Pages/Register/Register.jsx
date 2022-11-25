@@ -26,7 +26,7 @@ const Register = () => {
     const accountType = form.accountType.value;
     const password = form.password.value;
 
-    const userInfo = { name, email, accountType, password };
+    const userInfo = { name, email, accountType };
 
     handleCreateUser(email, password)
       .then((data) => {
