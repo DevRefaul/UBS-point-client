@@ -19,6 +19,7 @@ export const Authentication = createContext("");
 
 const auth = getAuth(app);
 
+
 // ----------------providers for auth started here  -------------------
 // google auth provider
 const googleProvider = new GoogleAuthProvider();
@@ -37,17 +38,17 @@ const AuthContext = ({ children }) => {
   const [user, setUser] = useState("");
 
   // loading state
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // create a user with email and password
-  const handleCreateUer = (email, password) => {
-    loading(true);
+  const handleCreateUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // handle log in user
   const handleLogIn = (email, password) => {
-    loading(true);
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -58,24 +59,25 @@ const AuthContext = ({ children }) => {
 
   // handle google sign in
   const handleGoogleSignIn = () => {
-    loading(true);
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
   // handle facebook sign in
   const handleFacebookSignIn = () => {
-    loading(true);
+    setLoading(true);
     return signInWithPopup(auth, facebookProvider);
   };
 
   // handle github sign in
   const handleGithubSignIn = () => {
-    loading(true);
+    setLoading(true);
     return signInWithPopup(auth, githubProvider);
   };
 
   // handleUpdateUser
   const handleUpdateUserInfo = () => {
+    setLoading(true);
     return updateProfile(user);
   };
 
@@ -100,7 +102,7 @@ const AuthContext = ({ children }) => {
   }, [user]);
 
   const authInfo = {
-    handleCreateUer,
+    handleCreateUser,
     handleLogIn,
     handleGoogleSignIn,
     handleFacebookSignIn,
@@ -109,6 +111,8 @@ const AuthContext = ({ children }) => {
     loading,
     handleResetPassword,
     handleDeleteUser,
+    handleSignOut,
+    handleUpdateUserInfo,
   };
 
   return (

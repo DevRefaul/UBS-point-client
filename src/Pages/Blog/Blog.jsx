@@ -1,10 +1,6 @@
-import React, { useContext } from "react";
-import { Authentication } from "../../Contexts/Auth/AuthContext";
+import React from "react";
 
 const Blog = () => {
-  const user = useContext(Authentication);
-  console.log(user);
-
   return (
     <div>
       <h2>This is blog page</h2>

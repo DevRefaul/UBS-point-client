@@ -1,12 +1,58 @@
-import React from "react";
+import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { Authentication } from "../../Contexts/Auth/AuthContext";
 
 const Register = () => {
+  // login functions from contxt
+  const {
+    handleCreateUser,
+    handleGoogleSignIn,
+    handleFacebookSignIn,
+    handleGithubSignIn,
+  } = useContext(Authentication);
 
+  // handle register
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const accountType = form.accountType.value;
+    const password = form.password.value;
 
-  const handleFacebookLogin = () => {};
-  const handleGoogleLogin = () => {};
-  const handleGithubLogin = () => {};
+    const userInfo = { name, email, accountType, password };
+
+    handleCreateUser(email, password)
+      .then((data) => {
+        const user = data.user;
+        if (user?.uid) {
+          toast.success("Successfully Created User");
+        }
+      })
+      .catch((err) => console.error(err.message));
+  };
+
+  // facebook login
+  const handleFacebookLogin = () => {
+    handleFacebookSignIn()
+      .thne((data) => console.log(data))
+      .catch((err) => console.error(err.message));
+  };
+
+  // google login
+  const handleGoogleLogin = () => {
+    handleGoogleSignIn()
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err.message));
+  };
+
+  // github login
+  const handleGithubLogin = () => {
+    handleGithubSignIn()
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err.message));
+  };
 
   return (
     <div>
@@ -17,6 +63,7 @@ const Register = () => {
             noValidate=""
             action=""
             className="space-y-6 ng-untouched ng-pristine ng-valid"
+            onSubmit={handleRegister}
           >
             {/* user name */}
             <div className="space-y-1 text-sm">
@@ -25,8 +72,8 @@ const Register = () => {
               </label>
               <input
                 type="text"
-                name="username"
-                id="username"
+                name="name"
+                id="name"
                 placeholder="Your Full Name"
                 className="w-full px-4 py-3 rounded-md border-green-500 border-2 bg-white text-black focus:border-orange-400"
               />
@@ -52,6 +99,7 @@ const Register = () => {
               <select
                 name="accountType"
                 id="accountType"
+                defaultValue="buyer"
                 className="w-full px-4 py-3 rounded-md border-green-500 border-2"
               >
                 <option value="buyer">Buyer</option>
@@ -74,7 +122,10 @@ const Register = () => {
             </div>
 
             {/* btn */}
-            <button className="block w-full p-3 font-bold text-center border-transparent rounded-sm text-white bg-green-400 hover:bg-white hover:text-green-500 hover:border-green-500 border-2">
+            <button
+              type="submit"
+              className="block w-full p-3 font-bold text-center border-transparent rounded-sm text-white bg-green-400 hover:bg-white hover:text-green-500 hover:border-green-500 border-2"
+            >
               Register
             </button>
           </form>
@@ -142,8 +193,8 @@ const Register = () => {
                   y2="40.615"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop offset="0" stop-color="#2aa4f4"></stop>
-                  <stop offset="1" stop-color="#007ad9"></stop>
+                  <stop offset="0" stopColor="#2aa4f4"></stop>
+                  <stop offset="1" stopColor="#007ad9"></stop>
                 </linearGradient>
                 <path
                   fill="url(#Ld6sqrtcxMyckEl6xeDdMa_uLWV5A9vXIPu_gr1)"

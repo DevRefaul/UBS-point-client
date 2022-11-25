@@ -1,32 +1,72 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Authentication } from "../../Contexts/Auth/AuthContext";
 
 const Login = () => {
-  const login = () => {};
+  const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
 
-  const handleFacebookLogin = () => {};
-  const handleGoogleLogin = () => {};
-  const handleGithubLogin = () => {};
+  // login functions from contxt
+  const {
+    handleLogIn,
+    handleGoogleSignIn,
+    handleFacebookSignIn,
+    handleGithubSignIn,
+  } = useContext(Authentication);
 
+  const login = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.name.value;
+    const password = form.password.value;
+    handleLogIn(email, password)
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err.message));
+  };
+
+  // facebook login
+  const handleFacebookLogin = () => {
+    handleFacebookSignIn()
+      .thne((data) => console.log(data))
+      .catch((err) => console.error(err.message));
+  };
+
+  // google login
+  const handleGoogleLogin = () => {
+    handleGoogleSignIn()
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err.message));
+  };
+
+  // github login
+  const handleGithubLogin = () => {
+    handleGithubSignIn()
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err.message));
+  };
+
+  // navigate(from)
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-white text-black border-2 border-green-500">
         <h1 className="text-2xl font-bold text-center">Login</h1>
         <form
-          onClick={login}
+          onSubmit={login}
           noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
         >
           <div className="space-y-1 text-sm">
             <label htmlFor="username" className="block text-gray-800">
-              Username
+              Email
             </label>
             <input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="Username"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Your Email"
+              required
               className="w-full px-4 py-3 rounded-md border-green-500 border-2 bg-white text-black focus:border-orange-400"
             />
           </div>
@@ -39,6 +79,7 @@ const Login = () => {
               name="password"
               id="password"
               placeholder="Password"
+              required
               className="w-full px-4 py-3 rounded-md border-green-500 border-2 bg-white text-black focus:border-orange-400"
             />
             <div className="flex justify-end text-xs text-gray-400">
@@ -47,7 +88,10 @@ const Login = () => {
               </Link>
             </div>
           </div>
-          <button className="block w-full p-3 font-bold text-center border-transparent rounded-sm text-white bg-green-400 hover:bg-white hover:text-green-500 hover:border-green-500 border-2">
+          <button
+            type="submit"
+            className="block w-full p-3 font-bold text-center border-transparent rounded-sm text-white bg-green-400 hover:bg-white hover:text-green-500 hover:border-green-500 border-2"
+          >
             Log in
           </button>
         </form>
