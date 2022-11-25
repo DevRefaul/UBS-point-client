@@ -6,6 +6,7 @@ import { Authentication } from "../../Contexts/Auth/AuthContext";
 import Error from "../../Pages/Error/Error";
 import Loading from "../Loading/Loading";
 import BookingModal from "./BookingModal";
+import ReportModal from "./ReportModal";
 import "./singleBikeInfo.css";
 
 const SingleBikeFullInfo = () => {
@@ -84,7 +85,6 @@ const SingleBikeFullInfo = () => {
   const userInfo = data;
   const { role } = userInfo.result;
 
-  const buyer = role === "buyer";
   const seller = role === "seller";
 
   return (
@@ -135,14 +135,18 @@ const SingleBikeFullInfo = () => {
             </button>
 
             {/* report to admin btn */}
-            <button className=" px-6 py-2 bg-red-400 text-white font-bold rounded md:ml-4 border-2 border-transparent hover:bg-white hover:text-red-500 hover:border-red-500">
+            <label
+              htmlFor="reportModal"
+              className=" px-6 py-2 bg-red-400 text-center text-white font-bold rounded md:ml-4 border-2 border-transparent hover:bg-white hover:text-red-500 hover:border-red-500"
+            >
               Report to admin
-            </button>
+            </label>
           </>
         )}
       </div>
 
       <BookingModal bike={singleBike.bike} />
+      <ReportModal bike={singleBike.bike} />
     </div>
   );
 };

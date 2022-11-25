@@ -32,7 +32,7 @@ const Register = () => {
       .then((data) => {
         const user = data.user;
         if (user?.uid) {
-          handleUpdateUserInfo(name)
+          handleUpdateUserInfo(userInfo)
             .then(() => {
               handleCreateUserInDB(userInfo);
               navigate(from, { replace: true });

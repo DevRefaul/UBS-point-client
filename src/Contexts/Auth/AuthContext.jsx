@@ -76,10 +76,14 @@ const AuthContext = ({ children }) => {
   };
 
   // handleUpdateUser
-  const handleUpdateUserInfo = (name) => {
-    setLoading(true);
-    return updateProfile(auth.currentUser, { displayName: name });
-  };
+    const handleUpdateUserInfo = (userInfo) => {
+      console.log(userInfo.name);
+      setLoading(true);
+      return updateProfile(auth.currentUser, {
+        displayName: userInfo.name,
+        photoURL: userInfo.photo,
+      });
+    };
 
   // handle sign out
   const handleSignOut = () => {

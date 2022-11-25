@@ -68,11 +68,11 @@ const Dashboard = () => {
             </label>
             {/* contents of dashboard */}
             {/* for mobile */}
-            <div className="lg:hidden h-screen bg-orange-100">
+            <div className="lg:hidden h-screen bg-green-100">
               <Outlet />
             </div>
             {/* for destop */}
-            <div className="hidden lg:block h-screen bg-orange-100">
+            <div className="hidden lg:block h-screen bg-green-100">
               <Outlet />
             </div>
           </div>
@@ -134,7 +134,7 @@ const Dashboard = () => {
                   </li>
                   <li>
                     <NavLink
-                      to="/dashboard/verifyseller"
+                      to="/dashboard/verifyrequest"
                       style={({ isActive }) => ({
                         color: isActive ? "#fff" : "",
                         background: isActive ? "#21C473" : "",
@@ -170,6 +170,17 @@ const Dashboard = () => {
                       })}
                     >
                       All Sellers
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/dashboard/verifyseller"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#fff" : "",
+                        background: isActive ? "#21C473" : "",
+                      })}
+                    >
+                      Verify Sellers
                     </NavLink>
                   </li>
                   <li>

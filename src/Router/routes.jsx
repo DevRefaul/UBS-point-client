@@ -10,6 +10,7 @@ import ManageProduct from "../Pages/DashboardPages/ManageProduct/ManageProduct";
 import MyBookings from "../Pages/DashboardPages/MyBookings/MyBookings";
 import Profile from "../Pages/DashboardPages/Profile/Profile";
 import ReportedProducts from "../Pages/DashboardPages/ReportedProducts/ReportedProducts";
+import VerifyApplication from "../Pages/DashboardPages/VerifyApplication/VerifyApplication";
 import VerifySeller from "../Pages/DashboardPages/VerifySeller/VerifySeller";
 import Error from "../Pages/Error/Error";
 import BMW from "../Pages/Home/BMW/BMW";
@@ -141,7 +142,7 @@ const routes = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/verifyseller",
+        path: "/dashboard/verifyrequest",
         element: (
           <AdminRoute>
             <VerifySeller />
@@ -161,6 +162,14 @@ const routes = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllSellers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/verifyseller",
+        element: (
+          <AdminRoute>
+            <VerifyApplication />
           </AdminRoute>
         ),
       },
