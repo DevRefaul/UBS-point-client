@@ -36,21 +36,36 @@ const Register = () => {
   // facebook login
   const handleFacebookLogin = () => {
     handleFacebookSignIn()
-      .thne((data) => console.log(data))
+      .thne((data) => {
+        const user = data.user;
+        if (user?.uid) {
+          toast.success("Successfully Logged In");
+        }
+      })
       .catch((err) => console.error(err.message));
   };
 
   // google login
   const handleGoogleLogin = () => {
     handleGoogleSignIn()
-      .then((data) => console.log(data))
+      .then((data) => {
+        const user = data.user;
+        if (user?.uid) {
+          toast.success("Successfully Logged In");
+        }
+      })
       .catch((err) => console.error(err.message));
   };
 
   // github login
   const handleGithubLogin = () => {
     handleGithubSignIn()
-      .then((data) => console.log(data))
+      .then((data) => {
+        const user = data.user;
+        if (user?.uid) {
+          toast.success("Successfully Logged In");
+        }
+      })
       .catch((err) => console.error(err.message));
   };
 

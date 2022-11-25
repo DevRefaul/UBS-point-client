@@ -109,6 +109,7 @@ const AuthContext = ({ children }) => {
     handleGithubSignIn,
     user,
     loading,
+    setLoading,
     handleResetPassword,
     handleDeleteUser,
     handleSignOut,

@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Authentication } from "../../Contexts/Auth/AuthContext";
 
@@ -7,43 +8,85 @@ const Login = () => {
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
+  console.log(from);
+
+  // state to to store email
+  const [email, setEmail] = useState("");
+
   // login functions from contxt
   const {
     handleLogIn,
     handleGoogleSignIn,
     handleFacebookSignIn,
     handleGithubSignIn,
+    handleResetPassword,
   } = useContext(Authentication);
 
+  // login function
   const login = (e) => {
     e.preventDefault();
     const form = e.target;
-    const email = form.name.value;
+    const email = form.email.value;
     const password = form.password.value;
     handleLogIn(email, password)
-      .then((data) => console.log(data))
-      .catch((err) => console.error(err.message));
+      .then((data) => {
+        const user = data.user;
+        if (user?.uid) {
+          navigate(from, { replace: true });
+          toast.success("Successfully Logged In");
+        }
+      })
+      .catch((err) => toast.error(err.message));
   };
 
   // facebook login
   const handleFacebookLogin = () => {
     handleFacebookSignIn()
-      .thne((data) => console.log(data))
-      .catch((err) => console.error(err.message));
+      .thne((data) => {
+        const user = data.user;
+        if (user?.uid) {
+          toast.success("Successfully Logged In");
+          navigate(from);
+        }
+      })
+      .catch((err) => toast.error(err.message));
   };
 
   // google login
   const handleGoogleLogin = () => {
     handleGoogleSignIn()
-      .then((data) => console.log(data))
-      .catch((err) => console.error(err.message));
+      .then((data) => {
+        const user = data.user;
+        if (user?.uid) {
+          toast.success("Successfully Logged In");
+          navigate(from);
+        }
+      })
+      .catch((err) => toast.error(err.message));
   };
 
   // github login
   const handleGithubLogin = () => {
     handleGithubSignIn()
-      .then((data) => console.log(data))
-      .catch((err) => console.error(err.message));
+      .then((data) => {
+        const user = data.user;
+        if (user?.uid) {
+          toast.success("Successfully Logged In");
+          navigate(from);
+        }
+      })
+      .catch((err) => toast.error(err.message));
+  };
+
+  // password reset
+  const handleForgotPass = () => {
+    handleResetPassword(email)
+      .then((data) =>
+        toast.success(
+          "An email with password reset link has send to your email"
+        )
+      )
+      .catch((err) => toast.error(err.message));
   };
 
   // navigate(from)
@@ -62,6 +105,7 @@ const Login = () => {
               Email
             </label>
             <input
+              onBlur={(e) => setEmail(e.target.value)}
               type="email"
               name="email"
               id="email"
@@ -83,9 +127,13 @@ const Login = () => {
               className="w-full px-4 py-3 rounded-md border-green-500 border-2 bg-white text-black focus:border-orange-400"
             />
             <div className="flex justify-end text-xs text-gray-400">
-              <Link rel="noopener noreferrer" to="">
+              <p
+                rel="noopener noreferrer"
+                className="text-orange-400 text-semibold"
+                onClick={handleForgotPass}
+              >
                 Forgot Password?
-              </Link>
+              </p>
             </div>
           </div>
           <button
@@ -105,6 +153,7 @@ const Login = () => {
           <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
         </div>
         <div className="flex justify-center space-x-4">
+          {/* google login */}
           <button
             aria-label="Log in with Google"
             className="p-3 rounded-sm"
@@ -159,8 +208,8 @@ const Login = () => {
                 y2="40.615"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop offset="0" stop-color="#2aa4f4"></stop>
-                <stop offset="1" stop-color="#007ad9"></stop>
+                <stop offset="0" stopColor="#2aa4f4"></stop>
+                <stop offset="1" stopColor="#007ad9"></stop>
               </linearGradient>
               <path
                 fill="url(#Ld6sqrtcxMyckEl6xeDdMa_uLWV5A9vXIPu_gr1)"

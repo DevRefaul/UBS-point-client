@@ -1,17 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/logo.png";
-
-/* 
-to="/"
-          style={({ isActive }) => ({
-            color: isActive ? "#fff" : "",
-            background: isActive ? "#21C473" : "",
-          })}
-*/
+import { Authentication } from "../../../Contexts/Auth/AuthContext";
 
 const Header = () => {
   const menuItems = ["home", "blog", "contact"];
+
+  const { user, handleSignOut } = useContext(Authentication);
 
   return (
     <div className=" bg-slate-100 sticky top-0 py-1 z-50">
@@ -77,12 +72,52 @@ const Header = () => {
           </ul>
         </div>
         <div className="navbar-end hidden md:flex">
-          <Link
-            to="/login"
-            className="btn bg-[#21C473] text-white font-bold border-2 border-transparent hover:text-[#21C473] hover:bg-transparent hover:border-2 hover:border-[#21C473]"
-          >
-            Login
-          </Link>
+          {!user ? (
+            <>
+              <Link
+                to="/login"
+                className="btn bg-[#21C473] text-white font-bold border-2 border-transparent hover:text-[#21C473] hover:bg-transparent hover:border-2 hover:border-[#21C473]"
+              >
+                Login
+              </Link>
+            </>
+          ) : (
+            <>
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img
+                      src={
+                        user.photoURL
+                          ? user.photoURL
+                          : "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+                      }
+                      alt=""
+                    />
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li className="my-2">
+                    <NavLink
+                      to="/dashboard"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#fff" : "",
+                        background: isActive ? "#21C473" : "",
+                      })}
+                    >
+                      Dashboard
+                    </NavLink>
+                  </li>
+                  <li className="my-2">
+                    <NavLink onClick={() => handleSignOut()}>Logout</NavLink>
+                  </li>
+                </ul>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -90,3 +125,18 @@ const Header = () => {
 };
 
 export default Header;
+
+/* 
+<div className="dropdown dropdown-end">
+      <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+        <div className="w-10 rounded-full">
+          <img src={user.photoURL} />
+        </div>
+      </label>
+      <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+        <li><NavLink>Dashboard</NavLink></li>
+        <li><NavLink onClick={()=>handleSignOut()}>Logout</NavLink></li>
+      </ul>
+    </div>
+
+*/

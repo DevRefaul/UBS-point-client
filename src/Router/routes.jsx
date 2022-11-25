@@ -9,6 +9,7 @@ import Login from "../Pages/Login/Login";
 import MVAgusta from "../Pages/MVAgusta/MVAgusta";
 import Register from "../Pages/Register/Register";
 import Yamaha from "../Pages/Yamaha/Yamaha";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Root from "../Root/Root";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -33,7 +34,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/honda/:id",
-        element: <SingleBikeFullInfo />,
+        element: (
+          <PrivateRoute>
+            <SingleBikeFullInfo />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/bmw",
@@ -41,7 +46,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/bmw/:id",
-        element: <SingleBikeFullInfo />,
+        element: (
+          <PrivateRoute>
+            <SingleBikeFullInfo />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/mvagusta",
@@ -49,7 +58,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/mv/:id",
-        element: <SingleBikeFullInfo />,
+        element: (
+          <PrivateRoute>
+            <SingleBikeFullInfo />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/yamaha",
@@ -57,7 +70,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/yamaha/:id",
-        element: <SingleBikeFullInfo />,
+        element: (
+          <PrivateRoute>
+            <SingleBikeFullInfo />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/blog",
