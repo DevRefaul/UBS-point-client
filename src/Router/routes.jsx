@@ -1,3 +1,4 @@
+import AdminRoute from "../AdminRoute/AdminRoute";
 import SingleBikeFullInfo from "../Components/SingleBikeFullInfo/SingleBikeFullInfo";
 import Blog from "../Pages/Blog/Blog";
 import Contact from "../Pages/Contact/Contact";
@@ -108,7 +109,11 @@ const routes = createBrowserRouter([
 
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard/profile",
@@ -128,19 +133,35 @@ const routes = createBrowserRouter([
       },
       {
         path: "/dashboard/verifyseller",
-        element: <VerifySeller />,
+        element: (
+          <AdminRoute>
+            <VerifySeller />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/allbuyers",
-        element: <AllUsers />,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/allsellers",
-        element: <AllSellers />,
+        element: (
+          <AdminRoute>
+            <AllSellers />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/reportedproducts",
-        element: <ReportedProducts />,
+        element: (
+          <AdminRoute>
+            <ReportedProducts />
+          </AdminRoute>
+        ),
       },
     ],
   },

@@ -23,10 +23,10 @@ const Register = () => {
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
-    const accountType = form.accountType.value;
+    const role = form.accountType.value;
     const password = form.password.value;
 
-    const userInfo = { name, email, accountType };
+    const userInfo = { name, email, role };
 
     handleCreateUser(email, password)
       .then((data) => {
@@ -34,6 +34,7 @@ const Register = () => {
         if (user?.uid) {
           handleUpdateUserInfo(name)
             .then(() => {
+              handleCreateUserInDB(userInfo);
               navigate(from, { replace: true });
               toast.success("Successfully Created User");
             })
@@ -78,6 +79,21 @@ const Register = () => {
       })
       .catch((err) => console.error(err.message));
   };
+
+  // creating user in database
+  const handleCreateUserInDB = (user) => {
+    fetch("http://localhost:5000/adduser", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err.message));
+  };
+
+
+
 
   return (
     <div>

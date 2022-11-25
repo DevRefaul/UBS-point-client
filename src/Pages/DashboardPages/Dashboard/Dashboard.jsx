@@ -34,9 +34,11 @@ const Dashboard = () => {
               Menu
             </label>
             {/* contents of dashboard */}
+            {/* for mobile */}
             <div className="lg:hidden h-screen bg-orange-100">
               <Outlet />
             </div>
+            {/* for destop */}
             <div className="hidden lg:block h-screen bg-orange-100">
               <Outlet />
             </div>
@@ -135,8 +137,6 @@ const Dashboard = () => {
             </ul>
           </div>
         </div>
-
-
       </div>
       <Footer />
     </>

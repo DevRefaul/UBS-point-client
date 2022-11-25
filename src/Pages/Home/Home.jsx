@@ -1,4 +1,5 @@
 import React from "react";
+import AdminRoute from "../../AdminRoute/AdminRoute";
 import Categorys from "./Categorys/Categorys";
 import ClientFeedback from "./ClientFeedback/ClientFeedback";
 import ContactSection from "./ContactSection/ContactSection";
