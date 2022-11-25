@@ -107,72 +107,85 @@ const Dashboard = () => {
               )}
               {/* conditional rendering for buyer end */}
 
-              <li>
-                <NavLink
-                  to="/dashboard/addproduct"
-                  style={({ isActive }) => ({
-                    color: isActive ? "#fff" : "",
-                    background: isActive ? "#21C473" : "",
-                  })}
-                >
-                  Add Bike
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/manageproduct"
-                  style={({ isActive }) => ({
-                    color: isActive ? "#fff" : "",
-                    background: isActive ? "#21C473" : "",
-                  })}
-                >
-                  Manage Products
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/verifyseller"
-                  style={({ isActive }) => ({
-                    color: isActive ? "#fff" : "",
-                    background: isActive ? "#21C473" : "",
-                  })}
-                >
-                  Apply Verify
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/allbuyers"
-                  style={({ isActive }) => ({
-                    color: isActive ? "#fff" : "",
-                    background: isActive ? "#21C473" : "",
-                  })}
-                >
-                  All Users
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/allsellers"
-                  style={({ isActive }) => ({
-                    color: isActive ? "#fff" : "",
-                    background: isActive ? "#21C473" : "",
-                  })}
-                >
-                  All Sellers
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/reportedproducts"
-                  style={({ isActive }) => ({
-                    color: isActive ? "#fff" : "",
-                    background: isActive ? "#21C473" : "",
-                  })}
-                >
-                  Reported Products
-                </NavLink>
-              </li>
+              {/* conditional rendering for seller start */}
+              {seller && (
+                <>
+                  <li>
+                    <NavLink
+                      to="/dashboard/addproduct"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#fff" : "",
+                        background: isActive ? "#21C473" : "",
+                      })}
+                    >
+                      Add Bike
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/dashboard/manageproduct"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#fff" : "",
+                        background: isActive ? "#21C473" : "",
+                      })}
+                    >
+                      Manage Products
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/dashboard/verifyseller"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#fff" : "",
+                        background: isActive ? "#21C473" : "",
+                      })}
+                    >
+                      Apply Verify
+                    </NavLink>
+                  </li>
+                </>
+              )}
+              {/* conditional rendering for slller end */}
+
+              {/* conditional rendering for admin start */}
+              {admin && (
+                <>
+                  <li>
+                    <NavLink
+                      to="/dashboard/allbuyers"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#fff" : "",
+                        background: isActive ? "#21C473" : "",
+                      })}
+                    >
+                      All Users
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/dashboard/allsellers"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#fff" : "",
+                        background: isActive ? "#21C473" : "",
+                      })}
+                    >
+                      All Sellers
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/dashboard/reportedproducts"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#fff" : "",
+                        background: isActive ? "#21C473" : "",
+                      })}
+                    >
+                      Reported Products
+                    </NavLink>
+                  </li>
+                </>
+              )}
+              {/* conditional rendering for admin end */}
             </ul>
           </div>
         </div>
