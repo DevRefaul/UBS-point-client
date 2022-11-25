@@ -7,8 +7,244 @@ const Dashboard = () => {
   return (
     <>
       <Header />
-      <div className="grid grid-cols-[1fr,4fr]">
-        <div className="h-screen bg-green-100">
+      <div className="">
+        {/* dashboard navigations for small screen */}
+
+        <div className="drawer drawer-mobile">
+          <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+          <div className="drawer-content">
+            <label
+              htmlFor="my-drawer-2"
+              className="btn bg-white border border-green-400 my-2 px-3 text-black  mx-6 drawer-button lg:hidden"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+              Menu
+            </label>
+            {/* contents of dashboard */}
+            <div className="lg:hidden h-screen bg-orange-100">
+              <Outlet />
+            </div>
+            <div className="hidden lg:block h-screen bg-orange-100">
+              <Outlet />
+            </div>
+          </div>
+          <div className="drawer-side">
+            <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+            <ul className="menu p-4 w-[80%] md:w-[30%] lg:w-full  bg-base-100 text-base-content">
+              <li>
+                <NavLink
+                  to="/dashboard/profile"
+                  style={({ isActive }) => ({
+                    color: isActive ? "#fff" : "",
+                    background: isActive ? "#21C473" : "",
+                  })}
+                >
+                  Profile
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/mybookings"
+                  style={({ isActive }) => ({
+                    color: isActive ? "#fff" : "",
+                    background: isActive ? "#21C473" : "",
+                  })}
+                >
+                  My Bookings
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/addproduct"
+                  style={({ isActive }) => ({
+                    color: isActive ? "#fff" : "",
+                    background: isActive ? "#21C473" : "",
+                  })}
+                >
+                  Add Bike
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/manageproduct"
+                  style={({ isActive }) => ({
+                    color: isActive ? "#fff" : "",
+                    background: isActive ? "#21C473" : "",
+                  })}
+                >
+                  Manage Products
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/verifyseller"
+                  style={({ isActive }) => ({
+                    color: isActive ? "#fff" : "",
+                    background: isActive ? "#21C473" : "",
+                  })}
+                >
+                  Apply Verify
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/allbuyers"
+                  style={({ isActive }) => ({
+                    color: isActive ? "#fff" : "",
+                    background: isActive ? "#21C473" : "",
+                  })}
+                >
+                  All Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/allsellers"
+                  style={({ isActive }) => ({
+                    color: isActive ? "#fff" : "",
+                    background: isActive ? "#21C473" : "",
+                  })}
+                >
+                  All Sellers
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/reportedproducts"
+                  style={({ isActive }) => ({
+                    color: isActive ? "#fff" : "",
+                    background: isActive ? "#21C473" : "",
+                  })}
+                >
+                  Reported Products
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+      </div>
+      <Footer />
+    </>
+  );
+};
+
+export default Dashboard;
+
+
+        // {
+        //   /* <div className="h-screen bg-green-100 hidden lg:block">
+        //   <ul className="menu p-4 w-full font-bold text-lg text-black">
+        //     <li>
+        //       <NavLink
+        //         to="/dashboard/profile"
+        //         style={({ isActive }) => ({
+        //           color: isActive ? "#fff" : "",
+        //           background: isActive ? "#21C473" : "",
+        //         })}
+        //       >
+        //         Profile
+        //       </NavLink>
+        //     </li>
+        //     <li>
+        //       <NavLink
+        //         to="/dashboard/mybookings"
+        //         style={({ isActive }) => ({
+        //           color: isActive ? "#fff" : "",
+        //           background: isActive ? "#21C473" : "",
+        //         })}
+        //       >
+        //         My Bookings
+        //       </NavLink>
+        //     </li>
+        //     <li>
+        //       <NavLink
+        //         to="/dashboard/addproduct"
+        //         style={({ isActive }) => ({
+        //           color: isActive ? "#fff" : "",
+        //           background: isActive ? "#21C473" : "",
+        //         })}
+        //       >
+        //         Add Bike
+        //       </NavLink>
+        //     </li>
+        //     <li>
+        //       <NavLink
+        //         to="/dashboard/manageproduct"
+        //         style={({ isActive }) => ({
+        //           color: isActive ? "#fff" : "",
+        //           background: isActive ? "#21C473" : "",
+        //         })}
+        //       >
+        //         Manage Products
+        //       </NavLink>
+        //     </li>
+        //     <li>
+        //       <NavLink
+        //         to="/dashboard/verifyseller"
+        //         style={({ isActive }) => ({
+        //           color: isActive ? "#fff" : "",
+        //           background: isActive ? "#21C473" : "",
+        //         })}
+        //       >
+        //         Apply Verify
+        //       </NavLink>
+        //     </li>
+        //     <li>
+        //       <NavLink
+        //         to="/dashboard/allbuyers"
+        //         style={({ isActive }) => ({
+        //           color: isActive ? "#fff" : "",
+        //           background: isActive ? "#21C473" : "",
+        //         })}
+        //       >
+        //         All Users
+        //       </NavLink>
+        //     </li>
+        //     <li>
+        //       <NavLink
+        //         to="/dashboard/allsellers"
+        //         style={({ isActive }) => ({
+        //           color: isActive ? "#fff" : "",
+        //           background: isActive ? "#21C473" : "",
+        //         })}
+        //       >
+        //         All Sellers
+        //       </NavLink>
+        //     </li>
+        //     <li>
+        //       <NavLink
+        //         to="/dashboard/reportedproducts"
+        //         style={({ isActive }) => ({
+        //           color: isActive ? "#fff" : "",
+        //           background: isActive ? "#21C473" : "",
+        //         })}
+        //       >
+        //         Reported Products
+        //       </NavLink>
+        //     </li>
+        //   </ul>
+        // </div> */
+        // } 
+
+        
+        /* 
+                // { dashboard navigations for big screen }
+        <div className="h-screen bg-green-100 hidden lg:block">
           <ul className="menu p-4 w-full font-bold text-lg text-black">
             <li>
               <NavLink
@@ -99,14 +335,11 @@ const Dashboard = () => {
               </NavLink>
             </li>
           </ul>
-        </div>
-        <div className="h-screen bg-orange-100">
-          <Outlet />
-        </div>
-      </div>
-      <Footer />
-    </>
-  );
-};
+        </div> 
 
-export default Dashboard;
+        // {contents of dashboard }
+         <div className="hidden lg:block h-screen bg-orange-100">
+          <Outlet />
+        </div> 
+
+        */
