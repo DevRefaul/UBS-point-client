@@ -1,4 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import Loading from "../../Components/Loading/Loading";
+import Error from "../Error/Error";
 import Categorys from "./Categorys/Categorys";
 import ClientFeedback from "./ClientFeedback/ClientFeedback";
 import ContactSection from "./ContactSection/ContactSection";
@@ -6,10 +9,33 @@ import Slider from "./Slider/Slider";
 import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
 
 const Home = () => {
+  // const [bikeBrands, setBikeBrands] = useState([]);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["category"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:5000/bikes");
+      const data = await res.json();
+      return data;
+    },
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <Error />;
+  }
+
+  const bikes = data.bikes;
+  const allBrands = bikes.map((bike) => bike.brand);
+
+  const brands = [...new Set(allBrands)];
+
   return (
     <div className="">
       <Slider />
-      <Categorys />
+      <Categorys brands={brands} />
       <WhyChooseUs />
       <ContactSection />
       <ClientFeedback />

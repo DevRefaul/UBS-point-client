@@ -5,29 +5,38 @@ import mv from "../../../assets/MV Agusta/MV-Agusta-F3-RR.webp";
 import yamaha from "../../../assets/Yamaha/black-yamaha-yzf-r6-motorcycle.jpg";
 import { Link } from "react-router-dom";
 
-const Categorys = () => {
-  const categorysInfo = [
-    {
-      name: "Honda",
-      image: `${honda}`,
-      to: "honda",
-    },
-    {
-      name: "Yamaha",
-      image: `${yamaha}`,
-      to: "yamaha",
-    },
-    {
-      name: "MV Agusta",
-      image: `${mv}`,
-      to: "mvagusta",
-    },
-    {
-      name: "BMW",
-      image: `${bmw}`,
-      to: "bmw",
-    },
-  ];
+const Categorys = ({ brands }) => {
+  let categorysInfo = [];
+
+  brands.map((brand) => {
+    if (brand === "honda") {
+      categorysInfo.push({
+        name: "Honda",
+        image: `${honda}`,
+        to: "honda",
+      });
+    } else if (brand === "yamaha") {
+      categorysInfo.push({
+        name: "Yamaha",
+        image: `${yamaha}`,
+        to: "yamaha",
+      });
+    } else if (brand === "mv") {
+      categorysInfo.push({
+        name: "MV Agusta",
+        image: `${mv}`,
+        to: "mv",
+      });
+    } else if (brand === "bmw") {
+      categorysInfo.push({
+        name: "BMW",
+        image: `${bmw}`,
+        to: "mv",
+      });
+    }
+
+    return null;
+  });
 
   return (
     <div className="w-[90%] md:w-[80%] mx-auto my-10">

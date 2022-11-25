@@ -64,7 +64,7 @@ const routes = createBrowserRouter([
         ),
       },
       {
-        path: "/mvagusta",
+        path: "/mv",
         element: <MVAgusta />,
       },
       {
