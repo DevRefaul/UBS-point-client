@@ -144,9 +144,9 @@ const routes = createBrowserRouter([
       {
         path: "/dashboard/verifyrequest",
         element: (
-          <AdminRoute>
+          <SellerRoute>
             <VerifySeller />
-          </AdminRoute>
+          </SellerRoute>
         ),
       },
       {

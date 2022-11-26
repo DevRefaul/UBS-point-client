@@ -1,24 +1,56 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
+import Loading from "../../../Components/Loading/Loading";
 import { Authentication } from "../../../Contexts/Auth/AuthContext";
 
 const Profile = () => {
-  const { user, handleUpdateUserInfo, setLoading } = useContext(Authentication);
+  const { user, handleUpdateUserInfo, setLoading,loading } = useContext(Authentication);
+
+// imgbb api key
+  const imgbbApi = process.env.REACT_APP_IMGBB_API
+
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-    const userInfo = { name: name };
-    handleUpdateUserInfo(userInfo)
-      .then(() => {
-        setLoading(false);
-        handleUpdateUserInDB(name);
-        toast.success("Profile Updated Successfully");
-      })
-      .catch((err) => console.error(err.message));
+    const photo = form.photo.files[0]
+// creating formdata for hosting image
+    const formData = new FormData()
+    formData.append('image' , photo)
 
-    form.reset();
+    if (loading) {
+  return<Loading/>
+}
+
+   fetch(`https://api.imgbb.com/1/upload?key=${imgbbApi}`, {
+     method: "POST",
+     body: formData,
+   })
+     .then((res) => res.json())
+     .then((imgdata) => {
+       console.log(imgdata);
+       if (imgdata.success) {
+         const imageurl = imgdata.data.url;
+         const userInfo = { name: name, imageurl: imageurl };
+
+         //  now calling the firebase function for update
+         handleUpdateUserInfo(userInfo)
+           .then(() => {
+             setLoading(false);
+             //  backend api for updating user name in database
+             handleUpdateUserInDB(name);
+             toast.success("Profile Updated Successfully");
+             form.reset();
+           })
+           .catch((err) => console.error(err.message));
+       }
+     })
+     .catch((err) => console.error(err.message));
+
+
+
+ 
   };
 
   const handleUpdateUserInDB = async (name) => {
@@ -30,7 +62,9 @@ const Profile = () => {
       body: JSON.stringify(userInfo),
     });
     const data = await res.json();
-    console.log(data);
+    if (data.updateName.matchedCount) {
+  toast.success("Name updated in Database")
+}
   };
 
   return (
@@ -70,6 +104,7 @@ const Profile = () => {
                 id="name"
                 className="w-full px-2 py-2 rounded my-1 border border-black"
                 required
+                defaultValue={user.displayName}
               />
             </div>
             {/* name field */}
@@ -93,6 +128,7 @@ const Profile = () => {
                 name="photo"
                 id="photo"
                 className="w-full px-2 py-2 rounded my-1"
+                required
               />
             </div>
             <button
@@ -106,6 +142,6 @@ const Profile = () => {
       </section>
     </div>
   );
-};
+};;
 
 export default Profile;

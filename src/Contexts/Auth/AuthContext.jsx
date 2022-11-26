@@ -81,7 +81,7 @@ const AuthContext = ({ children }) => {
       setLoading(true);
       return updateProfile(auth.currentUser, {
         displayName: userInfo.name,
-        photoURL: userInfo.photo,
+        photoURL: userInfo.imageurl,
       });
     };
 
