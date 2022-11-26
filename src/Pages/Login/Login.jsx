@@ -15,7 +15,7 @@ const Login = () => {
   const {
     handleLogIn,
     handleGoogleSignIn,
-    handleFacebookSignIn,
+    // handleFacebookSignIn,
     handleGithubSignIn,
     handleResetPassword,
     setLoading,
@@ -39,24 +39,24 @@ const Login = () => {
   };
 
   // facebook login
-  const handleFacebookLogin = () => {
-    handleFacebookSignIn()
-      .then((data) => {
-        const user = data.user;
-        if (user?.uid) {
-          const userInfo = {
-            name: user.displayName,
-            email: user.email,
-            role: "buyer",
-          };
-          handleCreateUserInDB(userInfo);
-          toast.success("Successfully Logged In");
-          setLoading(false);
-          navigate(from);
-        }
-      })
-      .catch((err) => toast.error(err.message));
-  };
+  // const handleFacebookLogin = () => {
+  //   handleFacebookSignIn()
+  //     .then((data) => {
+  //       const user = data.user;
+  //       if (user?.uid) {
+  //         const userInfo = {
+  //           name: user.displayName,
+  //           email: user.email,
+  //           role: "buyer",
+  //         };
+  //         handleCreateUserInDB(userInfo);
+  //         toast.success("Successfully Logged In");
+  //         setLoading(false);
+  //         navigate(from);
+  //       }
+  //     })
+  //     .catch((err) => toast.error(err.message));
+  // };
 
   // google login
   const handleGoogleLogin = () => {
@@ -218,7 +218,7 @@ const Login = () => {
           </button>
 
           {/* facebook login */}
-          <button
+          {/* <button
             aria-label="Log in with Facebook"
             className="p-3 rounded-sm"
             onClick={handleFacebookLogin}
@@ -251,7 +251,7 @@ const Login = () => {
                 d="M26.707,29.301h5.176l0.813-5.258h-5.989v-2.874c0-2.184,0.714-4.121,2.757-4.121h3.283V12.46 c-0.577-0.078-1.797-0.248-4.102-0.248c-4.814,0-7.636,2.542-7.636,8.334v3.498H16.06v5.258h4.948v14.452 C21.988,43.9,22.981,44,24,44c0.921,0,1.82-0.084,2.707-0.204V29.301z"
               ></path>
             </svg>
-          </button>
+          </button> */}
 
           {/* github login */}
           <button

@@ -69,11 +69,11 @@ const Dashboard = () => {
             </label>
             {/* contents of dashboard */}
             {/* for mobile */}
-            <div className="lg:hidden h-screen bg-green-100">
+            <div className="lg:hidden overflow-scroll h-screen bg-green-100">
               <Outlet />
             </div>
             {/* for destop */}
-            <div className="hidden lg:block h-screen bg-green-100">
+            <div className="hidden overflow-scroll lg:block h-screen bg-green-100">
               <Outlet />
             </div>
           </div>

@@ -12,7 +12,7 @@ const Register = () => {
   const {
     handleCreateUser,
     handleGoogleSignIn,
-    handleFacebookSignIn,
+    // handleFacebookSignIn,
     handleGithubSignIn,
     handleUpdateUserInfo,
     setLoading,
@@ -47,24 +47,24 @@ const Register = () => {
   };
 
   // facebook login
-  const handleFacebookLogin = () => {
-    handleFacebookSignIn()
-      .thne((data) => {
-        const user = data.user;
-        if (user?.uid) {
-          const userInfo = {
-            name: user.displayName,
-            email: user.email,
-            role: "buyer",
-          };
-          // passing data to db function to save user in database
-          handleCreateUserInDB(userInfo);
-          toast.success("Successfully Logged In");
-          setLoading(false);
-        }
-      })
-      .catch((err) => console.error(err.message));
-  };
+  // const handleFacebookLogin = () => {
+  //   handleFacebookSignIn()
+  //     .thne((data) => {
+  //       const user = data.user;
+  //       if (user?.uid) {
+  //         const userInfo = {
+  //           name: user.displayName,
+  //           email: user.email,
+  //           role: "buyer",
+  //         };
+  //         // passing data to db function to save user in database
+  //         handleCreateUserInDB(userInfo);
+  //         toast.success("Successfully Logged In");
+  //         setLoading(false);
+  //       }
+  //     })
+  //     .catch((err) => console.error(err.message));
+  // };
 
   // google login
   const handleGoogleLogin = () => {
@@ -119,9 +119,6 @@ const Register = () => {
       .catch((err) => console.error(err.message));
   };
 
-
-
-
   return (
     <div>
       <div className="flex justify-center items-center h-screen">
@@ -148,7 +145,7 @@ const Register = () => {
             </div>
             {/* user name */}
             <div className="space-y-1 text-sm">
-              <label htmlFor="username" className="block text-gray-800">
+              <label htmlFor="email" className="block text-gray-800">
                 Email
               </label>
               <input
@@ -161,7 +158,7 @@ const Register = () => {
             </div>
             {/* user name */}
             <div className="space-y-1 text-sm">
-              <label htmlFor="username" className="block text-gray-800">
+              <label htmlFor="accountType" className="block text-gray-800">
                 Account Type
               </label>
               <select
@@ -240,7 +237,7 @@ const Register = () => {
             </button>
 
             {/* facebook login */}
-            <button
+            {/* <button
               aria-label="Log in with Facebook"
               className="p-3 rounded-sm"
               onClick={handleFacebookLogin}
@@ -273,7 +270,7 @@ const Register = () => {
                   d="M26.707,29.301h5.176l0.813-5.258h-5.989v-2.874c0-2.184,0.714-4.121,2.757-4.121h3.283V12.46 c-0.577-0.078-1.797-0.248-4.102-0.248c-4.814,0-7.636,2.542-7.636,8.334v3.498H16.06v5.258h4.948v14.452 C21.988,43.9,22.981,44,24,44c0.921,0,1.82-0.084,2.707-0.204V29.301z"
                 ></path>
               </svg>
-            </button>
+            </button> */}
 
             {/* github login */}
             <button
