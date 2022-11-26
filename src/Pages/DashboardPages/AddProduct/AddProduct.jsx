@@ -73,6 +73,7 @@ const AddProduct = () => {
       .then((imgData) => {
         if (imgData.success) {
           const imageURL = imgData.data.url;
+          // gathering all the data about the post and storing inside and object
           const postInfo = {
             sellerName,
             sellerMail,

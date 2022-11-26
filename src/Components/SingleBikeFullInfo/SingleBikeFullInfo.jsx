@@ -152,3 +152,27 @@ const SingleBikeFullInfo = () => {
 };
 
 export default SingleBikeFullInfo;
+
+
+
+
+/* 
+            sellerName,
+            sellerMail,
+            bikeName,
+            usedTime,
+            condition,
+            totalrun,
+            location,
+            buyingPrice,
+            askingPrice,
+            contactNumber,
+            brandName,
+            description,
+            sellerVerified,
+            imageURL,
+            postedOn,
+            advertise,
+            available,
+            isBooked,
+*/
