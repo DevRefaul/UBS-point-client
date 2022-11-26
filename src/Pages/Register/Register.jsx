@@ -15,6 +15,7 @@ const Register = () => {
     handleFacebookSignIn,
     handleGithubSignIn,
     handleUpdateUserInfo,
+    setLoading,
   } = useContext(Authentication);
 
   // handle register
@@ -51,7 +52,15 @@ const Register = () => {
       .thne((data) => {
         const user = data.user;
         if (user?.uid) {
+          const userInfo = {
+            name: user.displayName,
+            email: user.email,
+            role: "buyer",
+          };
+          // passing data to db function to save user in database
+          handleCreateUserInDB(userInfo);
           toast.success("Successfully Logged In");
+          setLoading(false);
         }
       })
       .catch((err) => console.error(err.message));
@@ -62,8 +71,17 @@ const Register = () => {
     handleGoogleSignIn()
       .then((data) => {
         const user = data.user;
+
         if (user?.uid) {
+          const userInfo = {
+            name: user.displayName,
+            email: user.email,
+            role: "buyer",
+          };
+          // passing data to db function to save user in database
+          handleCreateUserInDB(userInfo);
           toast.success("Successfully Logged In");
+          setLoading(false);
         }
       })
       .catch((err) => console.error(err.message));
@@ -75,7 +93,15 @@ const Register = () => {
       .then((data) => {
         const user = data.user;
         if (user?.uid) {
+          const userInfo = {
+            name: user.displayName,
+            email: user.email,
+            role: "buyer",
+          };
+          // passing data to db function to save user in database
+          handleCreateUserInDB(userInfo);
           toast.success("Successfully Logged In");
+          setLoading(false);
         }
       })
       .catch((err) => console.error(err.message));

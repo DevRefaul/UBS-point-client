@@ -8,7 +8,6 @@ const Login = () => {
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
-
   // state to to store email
   const [email, setEmail] = useState("");
 
@@ -19,6 +18,7 @@ const Login = () => {
     handleFacebookSignIn,
     handleGithubSignIn,
     handleResetPassword,
+    setLoading,
   } = useContext(Authentication);
 
   // login function
@@ -41,10 +41,17 @@ const Login = () => {
   // facebook login
   const handleFacebookLogin = () => {
     handleFacebookSignIn()
-      .thne((data) => {
+      .then((data) => {
         const user = data.user;
         if (user?.uid) {
+          const userInfo = {
+            name: user.displayName,
+            email: user.email,
+            role: "buyer",
+          };
+          handleCreateUserInDB(userInfo);
           toast.success("Successfully Logged In");
+          setLoading(false);
           navigate(from);
         }
       })
@@ -57,7 +64,14 @@ const Login = () => {
       .then((data) => {
         const user = data.user;
         if (user?.uid) {
+          const userInfo = {
+            name: user.displayName,
+            email: user.email,
+            role: "buyer",
+          };
+          handleCreateUserInDB(userInfo);
           toast.success("Successfully Logged In");
+          setLoading(false);
           navigate(from);
         }
       })
@@ -70,7 +84,14 @@ const Login = () => {
       .then((data) => {
         const user = data.user;
         if (user?.uid) {
+          const userInfo = {
+            name: user.displayName,
+            email: user.email,
+            role: "buyer",
+          };
+          handleCreateUserInDB(userInfo);
           toast.success("Successfully Logged In");
+          setLoading(false);
           navigate(from);
         }
       })
@@ -88,7 +109,18 @@ const Login = () => {
       .catch((err) => toast.error(err.message));
   };
 
-  // navigate(from)
+  // creating user in database
+  const handleCreateUserInDB = (user) => {
+    fetch("http://localhost:5000/adduser", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err.message));
+  };
+
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-white text-black border-2 border-green-500">
