@@ -1,58 +1,71 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import Loading from "../../../Components/Loading/Loading";
 import { Authentication } from "../../../Contexts/Auth/AuthContext";
+import { GoCircleSlash, GoCheck } from "react-icons/go";
 
 const Profile = () => {
-  const { user, handleUpdateUserInfo, setLoading,loading } = useContext(Authentication);
+  const { user, handleUpdateUserInfo, setLoading, loading } =
+    useContext(Authentication);
 
-// imgbb api key
-  const imgbbApi = process.env.REACT_APP_IMGBB_API
+  const { data: userDetails, isLoading } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/user?email=${user.email}`);
+      const data = await res.json();
+      return data;
+    },
+  });
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  // imgbb api key
+  const imgbbApi = process.env.REACT_APP_IMGBB_API;
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-    const photo = form.photo.files[0]
-// creating formdata for hosting image
-    const formData = new FormData()
-    formData.append('image' , photo)
+    const photo = form.photo.files[0];
+    // creating formdata for hosting image
+    const formData = new FormData();
+    formData.append("image", photo);
 
     if (loading) {
-  return<Loading/>
-}
+      return <Loading />;
+    }
 
-   fetch(`https://api.imgbb.com/1/upload?key=${imgbbApi}`, {
-     method: "POST",
-     body: formData,
-   })
-     .then((res) => res.json())
-     .then((imgdata) => {
-       console.log(imgdata);
-       if (imgdata.success) {
-         const imageurl = imgdata.data.url;
-         const userInfo = { name: name, imageurl: imageurl };
+    // uplodaing image to imgbb
+    fetch(`https://api.imgbb.com/1/upload?key=${imgbbApi}`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgdata) => {
+        console.log(imgdata);
+        if (imgdata.success) {
+          const imageurl = imgdata.data.url;
+          const userInfo = { name: name, imageurl: imageurl };
 
-         //  now calling the firebase function for update
-         handleUpdateUserInfo(userInfo)
-           .then(() => {
-             setLoading(false);
-             //  backend api for updating user name in database
-             handleUpdateUserInDB(name);
-             toast.success("Profile Updated Successfully");
-             form.reset();
-           })
-           .catch((err) => console.error(err.message));
-       }
-     })
-     .catch((err) => console.error(err.message));
-
-
-
- 
+          //  now calling the firebase function for update
+          handleUpdateUserInfo(userInfo)
+            .then(() => {
+              setLoading(false);
+              //  backend api for updating user name in database
+              handleUpdateUserInDB(name);
+              toast.success("Profile Updated Successfully");
+              form.reset();
+            })
+            .catch((err) => console.error(err.message));
+        }
+      })
+      .catch((err) => console.error(err.message));
   };
 
+  // updating user in database
   const handleUpdateUserInDB = async (name) => {
     const userInfo = { email: user.email, name };
 
@@ -63,16 +76,35 @@ const Profile = () => {
     });
     const data = await res.json();
     if (data.updateName.matchedCount) {
-  toast.success("Name updated in Database")
-}
+      toast.success("Name updated in Database");
+    }
   };
+
+  const userInfo = userDetails.result;
 
   return (
     <div className="w-[98%] mx-auto">
       <h2 className="text-3xl font-semibold py-4 text-center">
         {user.displayName}'s Profile
       </h2>
-
+      {userInfo.role === "seller" && (
+        <>
+          {userInfo.sellerVerified === "true" ? (
+            <h6 className="text-xl font-bold text-center my-4">
+              Verified Seller{" "}
+              <GoCheck className="text-xl text-white bg-sky-500 rounded-full inline ml-2" />{" "}
+            </h6>
+          ) : (
+            <h6 className="text-xl font-bold text-center my-4">
+              Unverified Seller{" "}
+              <GoCircleSlash className="text-xl text-red-500 inline ml-2" />
+            </h6>
+          )}
+        </>
+      )}
+      {userInfo.role === "admin" && (
+        <h4 className="text-xl font-bold text-center my-4">Admin</h4>
+      )}
       {/*  */}
       <section className="flex justify-center">
         <div>
@@ -142,6 +174,6 @@ const Profile = () => {
       </section>
     </div>
   );
-};;
+};
 
 export default Profile;

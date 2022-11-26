@@ -6,7 +6,7 @@ import { Authentication } from "../Contexts/Auth/AuthContext";
 import Error from "../Pages/Error/Error";
 
 const AdminRoute = ({ children }) => {
-  const { user, handleSignOut } = useContext(Authentication);
+  const { user } = useContext(Authentication);
 
   const userEmail = user?.email;
 
@@ -30,8 +30,7 @@ const AdminRoute = ({ children }) => {
   const { role } = userInfo.result;
 
   if (role !== "admin") {
-    handleSignOut();
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
 
   return children;

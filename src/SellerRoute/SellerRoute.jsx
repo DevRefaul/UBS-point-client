@@ -6,7 +6,7 @@ import { Authentication } from "../Contexts/Auth/AuthContext";
 import Error from "../Pages/Error/Error";
 
 const SellerRoute = ({ children }) => {
-  const { user, handleSignOut } = useContext(Authentication);
+  const { user } = useContext(Authentication);
 
   const userEmail = user?.email;
 
@@ -32,8 +32,7 @@ const SellerRoute = ({ children }) => {
   const { role } = userInfo.result;
 
   if (role !== "seller") {
-    handleSignOut();
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
 
   return children;

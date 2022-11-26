@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import Loading from "../../../Components/Loading/Loading";
 import Footer from "../../../Components/Shared/Footer/Footer";
 import Header from "../../../Components/Shared/Header/Header";
@@ -9,6 +9,7 @@ import Error from "../../Error/Error";
 
 const Dashboard = () => {
   const { user } = useContext(Authentication);
+  const navigate = useNavigate();
 
   const userEmail = user?.email;
 
