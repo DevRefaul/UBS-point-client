@@ -106,7 +106,7 @@ const Header = () => {
                 >
                   <li className="my-2">
                     <NavLink
-                      to="/dashboard"
+                      to="/dashboard/profile"
                       style={({ isActive }) => ({
                         color: isActive ? "#fff" : "",
                         background: isActive ? "#21C473" : "",

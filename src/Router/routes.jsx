@@ -23,6 +23,7 @@ import Yamaha from "../Pages/Yamaha/Yamaha";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Root from "../Root/Root";
 import SellerRoute from "../SellerRoute/SellerRoute";
+import UserRoot from "../UserRoot/UserRoot";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -118,12 +119,20 @@ const routes = createBrowserRouter([
     ),
     children: [
       {
+        path: "/dashboard",
+        element: <Profile />,
+      },
+      {
         path: "/dashboard/profile",
         element: <Profile />,
       },
       {
         path: "/dashboard/mybookings",
-        element: <MyBookings />,
+        element: (
+          <UserRoot>
+            <MyBookings />
+          </UserRoot>
+        ),
       },
       {
         path: "/dashboard/addproduct",

@@ -13,7 +13,7 @@ const SellerRoute = ({ children }) => {
   // passing email to server
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["email"],
+    queryKey: ["selleremail"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/user?email=${userEmail}`);
       const data = await res.json();

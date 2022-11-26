@@ -5,13 +5,15 @@ import Loading from "../Components/Loading/Loading";
 import { Authentication } from "../Contexts/Auth/AuthContext";
 import Error from "../Pages/Error/Error";
 
-const AdminRoute = ({ children }) => {
+const UserRoot = ({ children }) => {
   const { user } = useContext(Authentication);
 
   const userEmail = user?.email;
 
+  // passing email to server
+
   const { data, isLoading, error } = useQuery({
-    queryKey: ["adminemail"],
+    queryKey: ["selleremail"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/user?email=${userEmail}`);
       const data = await res.json();
@@ -29,11 +31,11 @@ const AdminRoute = ({ children }) => {
   const userInfo = data;
   const { role } = userInfo.result;
 
-  if (role !== "admin") {
+  if (role === "seller" || role === "admin") {
     return <Navigate to="/" />;
   }
 
   return children;
 };
 
-export default AdminRoute;
+export default UserRoot;

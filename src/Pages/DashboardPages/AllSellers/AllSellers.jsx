@@ -45,9 +45,7 @@ const AllSellers = () => {
   return (
     <div className="w-[98%] mx-auto">
       <div>
-        <h2 className="text-3xl font-semibold text-center py-4">
-          All Sellerss
-        </h2>
+        <h2 className="text-3xl font-semibold text-center py-4">All Sellers</h2>
 
         {/* table start */}
         <div className="overflow-x-auto">
@@ -69,7 +67,7 @@ const AllSellers = () => {
                   <td>{seller.name}</td>
                   <td>{seller.email}</td>
                   <td>{seller.role}</td>
-                  <td>{seller.verified}</td>
+                  <td>{seller.sellerVerified}</td>
                   <td className="flex justify-center">
                     <button
                       onClick={() => handleDeleteSeller(seller._id)}

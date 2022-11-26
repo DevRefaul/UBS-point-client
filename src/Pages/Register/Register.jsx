@@ -25,8 +25,9 @@ const Register = () => {
     const email = form.email.value;
     const role = form.accountType.value;
     const password = form.password.value;
+    const sellerVerified = "false";
 
-    const userInfo = { name, email, role };
+    const userInfo = { name, email, role, sellerVerified };
 
     handleCreateUser(email, password)
       .then((data) => {
