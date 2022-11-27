@@ -4,7 +4,7 @@ import logo from "../../../assets/logo.png";
 import { Authentication } from "../../../Contexts/Auth/AuthContext";
 
 const Header = () => {
-  const menuItems = ["home", "blog", "contact"];
+  const menuItems = ["home", "blogs", "contact"];
 
   const { user, handleSignOut } = useContext(Authentication);
 
@@ -57,10 +57,12 @@ const Header = () => {
 
           {/* logo end */}
         </div>
+
+        {/* desktop menu */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal p-0 font-semibold">
+          <ul className="menu menu-horizontal font-semibold">
             {menuItems.map((menuItem, idx) => (
-              <li key={idx} className="mx-2">
+              <li key={idx} className="px-2">
                 <NavLink
                   className="rounded capitalize"
                   to={`/${menuItem}`}

@@ -16,25 +16,23 @@ const VerifySeller = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`http://localhost:5000/user?email=${user.email}`).then((res) => {
-      setSeller(res.data);
+    axios.get(`http://localhost:5000/user?email=${user?.email}`).then((res) => {
+      setSeller(res?.data);
       setLoading(false);
     });
-  }, [user.email]);
+  }, [user?.email]);
 
   if (loading) {
     return <Loading />;
   }
 
-  console.log(seller);
-
-  const sellerInfo = seller.result;
+  const sellerInfo = seller?.result;
 
   const handleApplyVerification = (e) => {
     e.preventDefault();
     setLoading(true);
     const form = e.target;
-    const imgfile = form.photo.files[0];
+    const imgfile = form?.photo?.files[0];
 
     const formData = new FormData();
     formData.append("image", imgfile);
@@ -44,12 +42,12 @@ const VerifySeller = () => {
     fetch(url, { method: "POST", body: formData })
       .then((res) => res.json())
       .then((imgdata) => {
-        if (imgdata.success) {
-          const imgurl = imgdata.data.url;
+        if (imgdata?.success) {
+          const imgurl = imgdata?.data?.url;
 
           const userInfo = {
-            sellerEmail: user.email,
-            sellerName: user.displayName,
+            sellerEmail: user?.email,
+            sellerName: user?.displayName,
             sellerDoc: imgurl,
           };
 
@@ -61,7 +59,7 @@ const VerifySeller = () => {
           })
             .then((res) => res.json())
             .then((appliedResponse) => {
-              if (appliedResponse.result.insertedId) {
+              if (appliedResponse?.result?.insertedId) {
                 setLoading(false);
                 toast.success(
                   "Applied For Verification Wait For Admin Response"
@@ -80,7 +78,7 @@ const VerifySeller = () => {
 
   return (
     <div className="w-[98%] mx-auto">
-      {sellerInfo.sellerVerified === "true" ? (
+      {sellerInfo?.sellerVerified === "true" ? (
         <>
           <div className="flex justify-center items-center h-[80vh]">
             <div>
