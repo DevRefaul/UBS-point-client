@@ -27,8 +27,8 @@ const Home = () => {
     return <Error />;
   }
 
-  const bikes = data.bikes;
-  const allBrands = bikes.map((bike) => bike.brand);
+  const bikes = data?.bikes;
+  const allBrands = bikes?.map((bike) => bike?.brandName);
 
   const brands = [...new Set(allBrands)];
 

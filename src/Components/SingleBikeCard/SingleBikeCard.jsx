@@ -42,7 +42,7 @@ const SingleBikeCard = ({ bike }) => {
                 Seller :{" "}
                 <span className="flex items-center ml-1">
                   {sellerName}{" "}
-                  {sellerVerified && (
+                  {sellerVerified === "true" && (
                     <span>
                       <MdCheckCircle className="text-lg text-blue-400 inline ml-1" />
                     </span>
@@ -58,7 +58,7 @@ const SingleBikeCard = ({ bike }) => {
               {isBooked === "true" ? (
                 <>
                   <button
-                    className="px-6 py-2 bg-green-400 text-white font-bold rounded md:ml-4 border-2 border-transparent hover:bg-white hover:text-green-500 hover:border-green-500"
+                    className="px-6 py-2 bg-gray-400 text-white font-bold rounded w-full cursor-not-allowed"
                     disabled
                   >
                     This Bike is Currently Booked
@@ -67,7 +67,7 @@ const SingleBikeCard = ({ bike }) => {
               ) : (
                 <>
                   <Link to={`/${brandName}/${_id}`}>
-                    <button className="px-6 py-2 bg-green-400 text-white font-bold rounded md:ml-4 border-2 border-transparent hover:bg-white hover:text-green-500 hover:border-green-500">
+                    <button className="px-6 py-2 bg-green-400 text-white font-bold rounded border-2 border-transparent hover:bg-white hover:text-green-500 hover:border-green-500">
                       See Details
                     </button>
                   </Link>

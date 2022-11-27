@@ -135,6 +135,17 @@ const Dashboard = () => {
                   </li>
                   <li>
                     <NavLink
+                      to="/dashboard/soldbikes"
+                      style={({ isActive }) => ({
+                        color: isActive ? "#fff" : "",
+                        background: isActive ? "#21C473" : "",
+                      })}
+                    >
+                      Sold Bikes
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
                       to="/dashboard/verifyrequest"
                       style={({ isActive }) => ({
                         color: isActive ? "#fff" : "",

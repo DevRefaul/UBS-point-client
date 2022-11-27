@@ -7,7 +7,9 @@ import AllSellers from "../Pages/DashboardPages/AllSellers/AllSellers";
 import AllUsers from "../Pages/DashboardPages/AllUsers/AllUsers";
 import Dashboard from "../Pages/DashboardPages/Dashboard/Dashboard";
 import ManageProduct from "../Pages/DashboardPages/ManageProduct/ManageProduct";
+import SoldProduct from "../Pages/DashboardPages/ManageProduct/SoldProduct";
 import MyBookings from "../Pages/DashboardPages/MyBookings/MyBookings";
+import Payment from "../Pages/DashboardPages/Payment/Payment";
 import Profile from "../Pages/DashboardPages/Profile/Profile";
 import ReportedProducts from "../Pages/DashboardPages/ReportedProducts/ReportedProducts";
 import VerifyApplication from "../Pages/DashboardPages/VerifyApplication/VerifyApplication";
@@ -135,6 +137,14 @@ const routes = createBrowserRouter([
         ),
       },
       {
+        path: "/dashboard/payment",
+        element: (
+          <UserRoot>
+            <Payment />
+          </UserRoot>
+        ),
+      },
+      {
         path: "/dashboard/addproduct",
         element: (
           <SellerRoute>
@@ -155,6 +165,14 @@ const routes = createBrowserRouter([
         element: (
           <SellerRoute>
             <VerifySeller />
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/soldbikes",
+        element: (
+          <SellerRoute>
+            <SoldProduct />
           </SellerRoute>
         ),
       },

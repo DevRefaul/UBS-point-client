@@ -3,9 +3,11 @@ import toast from "react-hot-toast";
 import { MdCheckCircle } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { Authentication } from "../../Contexts/Auth/AuthContext";
+import handleUpdateProductBooking from "./updateProductBooking";
 
-const BookingModal = ({ bike }) => {
+const BookingModal = ({ bike, refetch }) => {
   const {
+    _id,
     bikeName,
     askingPrice,
     contactNumber,
@@ -22,10 +24,15 @@ const BookingModal = ({ bike }) => {
     e.preventDefault();
     const form = e.target;
     const bikeInfo = bike;
+    bikeInfo.isBooked = "true";
     const bookerName = form.name.value;
     const bookerEmail = form.email.value;
     const bookerPhone = form.userPhone.value;
     const mettingLocation = form.place.value;
+    const isPaid = "false";
+    const sellerEmail = bikeInfo.sellerMail;
+    const postId = bikeInfo._id;
+    // const
 
     const bookingInfo = {
       bikeInfo,
@@ -33,6 +40,9 @@ const BookingModal = ({ bike }) => {
       bookerEmail,
       bookerPhone,
       mettingLocation,
+      isPaid,
+      sellerEmail,
+      postId,
     };
 
     const res = await fetch("http://localhost:5000/booked", {
@@ -41,10 +51,16 @@ const BookingModal = ({ bike }) => {
       body: JSON.stringify(bookingInfo),
     });
     const bookingResponse = await res.json();
-    console.log(bookingResponse);
+
     if (bookingResponse.bookingInfo.insertedId) {
-      toast.success("Successfully Booked Your Dream");
-      navigate("/dashboard/mybookings");
+      // updating product booked field
+      const updateBooked = await handleUpdateProductBooking(_id, "true");
+
+      if (updateBooked?.updatedProductResponse?.modifiedCount > 0) {
+        refetch();
+        toast.success("Successfully Booked Your Dream");
+        navigate("/dashboard/mybookings");
+      }
     } else {
       toast.error("Can't Book Your Dream Try Again Sometime Later");
     }
@@ -100,6 +116,7 @@ const BookingModal = ({ bike }) => {
               id="userPhone"
               placeholder="Your Phone Number"
               className="w-full border-2 py-2 px-1 rounded my-1"
+              required
             />
             <input
               type="text"
@@ -107,6 +124,7 @@ const BookingModal = ({ bike }) => {
               id="place"
               placeholder="Your Meeting Location"
               className="w-full border-2 py-2 px-1 rounded my-1"
+              required
             />
             <button
               type="submit"

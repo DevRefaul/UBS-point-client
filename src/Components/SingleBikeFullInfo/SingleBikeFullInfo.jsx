@@ -17,6 +17,7 @@ const SingleBikeFullInfo = () => {
     data: singleBike,
     isLoading,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["brand"],
     queryFn: async () => {
@@ -101,7 +102,7 @@ const SingleBikeFullInfo = () => {
       <p className="text-lg font-semibold py-1">
         By - {sellerName}{" "}
         <span>
-          {sellerVerified && (
+          {sellerVerified === "true" && (
             <MdCheckCircle className="text-blue-400 ml-1 inline" />
           )}
         </span>
@@ -151,7 +152,7 @@ const SingleBikeFullInfo = () => {
         )}
       </div>
 
-      <BookingModal bike={singleBike.bike} />
+      <BookingModal bike={singleBike.bike} refetch={refetch} />
       <ReportModal bike={singleBike.bike} />
     </div>
   );
