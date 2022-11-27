@@ -9,7 +9,6 @@ export const promote = async (id) => {
         body: JSON.stringify({ id })
     })
     const promoteResponse = await res.json()
-    console.log(promoteResponse)
     return promoteResponse
 }
 
@@ -18,9 +17,18 @@ export const deletePost = async (id) => {
     const res = await fetch(`http://localhost:5000/deletesellerpost/${id}`, {
         method: "DELETE"
     })
-    const promoteResponse = await res.json()
-    console.log(promoteResponse)
-    return promoteResponse
+    const deleteResponse = await res.json()
+    return deleteResponse
 }
 
 
+export const updateProductAvailability = async (id, available) => {
+    const res = await fetch(`http://localhost:5000/updateProductAvalablity`, {
+        method: "PATCH",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ id, available })
+    })
+    const updateProductResponse = await res.json()
+    console.log(updateProductResponse)
+    return updateProductResponse
+}

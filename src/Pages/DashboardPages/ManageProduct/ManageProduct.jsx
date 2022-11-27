@@ -3,7 +3,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import Loading from "../../../Components/Loading/Loading";
 import { Authentication } from "../../../Contexts/Auth/AuthContext";
-import { promote, deletePost } from "./manageProductsFunctionality";
+import {
+  promote,
+  deletePost,
+  updateProductAvailability,
+} from "./manageProductsFunctionality";
 import toast from "react-hot-toast";
 
 const ManageProduct = () => {
@@ -19,6 +23,7 @@ const ManageProduct = () => {
       .get(`http://localhost:5000/singlesellerposts?email=${user.email}`)
       .then((res) => {
         setPosts(res.data);
+        setRefresh(false);
         setloader(false);
       });
   }, [user.email, refresh]);
@@ -41,14 +46,30 @@ const ManageProduct = () => {
     if (confirm) {
       setloader(true);
       const deleteFun = await deletePost(id);
-      console.log(deleteFun);
       if (deleteFun.deleteResponse.deletedCount > 0) {
+        setRefresh(true);
         toast.success("Post Deleted Successfully");
         setloader(false);
-        setRefresh(true);
       }
     } else {
       toast.error("Deletation Failed");
+      setRefresh(true);
+      setloader(false);
+    }
+  };
+
+  const handleSetAvailable = async (id, value) => {
+    setloader(true);
+    const availableFun = await updateProductAvailability(id, value);
+
+    if (availableFun.updatedProductResponse.modifiedCount > 0) {
+      setRefresh(true);
+      toast.success("Post Availability Changed Successfully");
+      setloader(false);
+    } else {
+      toast.error("Can't Change Availablity");
+      setRefresh(true);
+      setloader(false);
     }
   };
 
@@ -137,6 +158,10 @@ const ManageProduct = () => {
                     name="available"
                     id="available"
                     className="bg-green-400 text-white px-3 py-2 rounded font-bold"
+                    defaultValue={post.available}
+                    onChange={(e) =>
+                      handleSetAvailable(post._id, e.target.value)
+                    }
                   >
                     <option value="available">Available</option>
                     <option value="sold">Sold</option>
