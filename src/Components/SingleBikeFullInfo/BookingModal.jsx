@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { MdCheckCircle } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import { Authentication } from "../../Contexts/Auth/AuthContext";
 
 const BookingModal = ({ bike }) => {
@@ -13,7 +15,10 @@ const BookingModal = ({ bike }) => {
   } = bike;
   const { user } = useContext(Authentication);
 
-  const handleBook = (e) => {
+  // naviagte for navigating user to profile to see orders
+  const navigate = useNavigate();
+
+  const handleBook = async (e) => {
     e.preventDefault();
     const form = e.target;
     const bikeInfo = bike;
@@ -30,7 +35,19 @@ const BookingModal = ({ bike }) => {
       mettingLocation,
     };
 
-    console.log(bookingInfo);
+    const res = await fetch("http://localhost:5000/booked", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(bookingInfo),
+    });
+    const bookingResponse = await res.json();
+    console.log(bookingResponse);
+    if (bookingResponse.bookingInfo.insertedId) {
+      toast.success("Successfully Booked Your Dream");
+      navigate("/dashboard/mybookings");
+    } else {
+      toast.error("Can't Book Your Dream Try Again Sometime Later");
+    }
   };
 
   return (

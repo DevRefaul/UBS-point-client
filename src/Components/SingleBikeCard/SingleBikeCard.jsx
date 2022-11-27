@@ -29,7 +29,7 @@ const SingleBikeCard = ({ bike }) => {
                 <img
                   src={imageURL}
                   alt="Album"
-                  className="h-[300px] w-full object-cover"
+                  className="h-[300px] w-full object-cover cursor-pointer"
                 />
               </PhotoView>
             </PhotoProvider>
