@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { Authentication } from "../../Contexts/Auth/AuthContext";
+import { GoIssueOpened } from "react-icons/go";
 
 const ReportModal = ({ bike }) => {
-  const { _id, sellerEmail } = bike;
+  const { _id, sellerMail } = bike;
   const { user } = useContext(Authentication);
 
   // report to admin
@@ -11,7 +12,7 @@ const ReportModal = ({ bike }) => {
     e.preventDefault();
     const form = e.target;
     const reporter = user.email;
-    const reported = sellerEmail;
+    const reported = sellerMail;
     const reportedPost = _id;
     const message = form.message.value;
 
@@ -45,7 +46,7 @@ const ReportModal = ({ bike }) => {
           >
             ✕
           </label>
-          <h3 className="text-lg font-bold">Report To Admin</h3>
+          <h3 className="text-lg font-bold mb-4">Report To Admin</h3>
           <form onSubmit={handleReportPost}>
             <div>
               <label htmlFor="reporter">Reporter</label>
@@ -65,7 +66,7 @@ const ReportModal = ({ bike }) => {
                 name="reported"
                 id="reported"
                 disabled
-                defaultValue={sellerEmail}
+                defaultValue={sellerMail}
                 className="w-full border-2 py-2 px-1 rounded my-1"
               />
             </div>
@@ -76,14 +77,16 @@ const ReportModal = ({ bike }) => {
                 id="message"
                 cols="30"
                 rows="5"
+                required
+                placeholder="Write Down Your Report Message"
                 className="w-full border-2 py-2 px-1 rounded my-1"
               ></textarea>
             </div>
             <button
               type="submit"
-              className="px-6 py-2 bg-green-400 text-white font-bold rounded mt-4 border-2 border-transparent hover:bg-white hover:text-green-500 hover:border-green-500"
+              className="px-6 py-2 bg-red-400 text-white font-bold rounded mt-4 border-2 border-transparent hover:bg-white hover:text-red-500 hover:border-red-500"
             >
-              Book Your Dream
+              Report <GoIssueOpened className="inline ml-2" />
             </button>
           </form>
         </div>

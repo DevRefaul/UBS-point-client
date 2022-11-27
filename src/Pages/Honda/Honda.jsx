@@ -8,7 +8,7 @@ const Honda = () => {
   const { isLoading, data, error } = useQuery({
     queryKey: ["honda"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/bikes?brand=honda");
+      const res = await fetch("http://localhost:5000/bikes?brandName=honda");
       const data = await res.json();
       return data;
     },

@@ -8,7 +8,7 @@ const BMW = () => {
   const { isLoading, data, error } = useQuery({
     queryKey: ["bmw"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/bikes?brand=bmw");
+      const res = await fetch("http://localhost:5000/bikes?brandName=bmw");
       const data = res.json();
       return data;
     },

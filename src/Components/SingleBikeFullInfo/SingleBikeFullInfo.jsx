@@ -59,19 +59,22 @@ const SingleBikeFullInfo = () => {
   }
 
   const {
-    bikeName,
-    brand,
-    askingPrice,
-    buyingPrice,
-    condition,
-    contact,
-    description,
-    image,
-    location,
     sellerName,
+    sellerMail,
+    bikeName,
+    usedTime,
+    condition,
+    totalrun,
+    location,
+    buyingPrice,
+    askingPrice,
+    contactNumber,
+    brandName,
+    description,
     sellerVerified,
-    totalKiloRun,
-    used,
+    imageURL,
+    postedOn,
+    available,
   } = singleBike.bike;
 
   // loading and error state for loading user data
@@ -91,8 +94,9 @@ const SingleBikeFullInfo = () => {
     <div className="w-[90%] md:w-[80%] mx-auto my-10 py-4">
       {/* bike details */}
       <h2 className="text-3xl font-bold">{bikeName}</h2>
+      <p className="para">Posted On : {postedOn}</p>
       <p className="text-lg font-semibold py-1">
-        Brand : <span className="capitalize">{brand}</span>
+        Brand : <span className="capitalize">{brandName}</span>
       </p>
       <p className="text-lg font-semibold py-1">
         By - {sellerName}{" "}
@@ -103,14 +107,16 @@ const SingleBikeFullInfo = () => {
         </span>
       </p>
       <div className="my-4">
-        <img src={image} alt="" className="w-[50%]" />
+        <img src={imageURL} alt="" className="w-[50%]" />
       </div>
-      <p className="para">Total Run : {totalKiloRun} km</p>
-      <p className="para">Used : {used}</p>
+      <p className="para">Total Run : {totalrun} km</p>
+      <p className="para">Used : {usedTime}</p>
       <p className="para">Condition : {condition}</p>
 
       <p className="para">Location : {location}</p>
-      <p className="para">Contact : {contact}</p>
+      <p className="para">Contact : {contactNumber}</p>
+      <p className="para">Seller Email : {sellerMail}</p>
+      <p className="para capitalize">This Bike is : {available}</p>
       <p className="para">About Bike : {description}</p>
       <h4 className="text-xl font-bold mt-2">Buying Price : ${buyingPrice}</h4>
       <h4 className="text-xl font-bold mb-2">Asking Price : ${askingPrice}</h4>
@@ -152,27 +158,3 @@ const SingleBikeFullInfo = () => {
 };
 
 export default SingleBikeFullInfo;
-
-
-
-
-/* 
-            sellerName,
-            sellerMail,
-            bikeName,
-            usedTime,
-            condition,
-            totalrun,
-            location,
-            buyingPrice,
-            askingPrice,
-            contactNumber,
-            brandName,
-            description,
-            sellerVerified,
-            imageURL,
-            postedOn,
-            advertise,
-            available,
-            isBooked,
-*/

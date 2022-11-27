@@ -8,7 +8,7 @@ const MVAgusta = () => {
   const { isLoading, data, error } = useQuery({
     queryKey: ["mv"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/bikes?brand=mv");
+      const res = await fetch("http://localhost:5000/bikes?brandName=mv");
       const data = res.json();
       return data;
     },

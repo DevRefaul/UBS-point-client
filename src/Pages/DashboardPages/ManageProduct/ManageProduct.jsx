@@ -13,6 +13,8 @@ import toast from "react-hot-toast";
 const ManageProduct = () => {
   const { user } = useContext(Authentication);
   const [loader, setloader] = useState(false);
+
+  // resresh state to updated data after changes
   const [refresh, setRefresh] = useState(false);
 
   const [posts, setPosts] = useState({});
@@ -35,6 +37,7 @@ const ManageProduct = () => {
     setloader(true);
     const promoteFun = await promote(id);
     if (promoteFun.promotedResponse.modifiedCount) {
+      setRefresh(true);
       toast.success("Post Promoted Successfully");
       setloader(false);
     }
