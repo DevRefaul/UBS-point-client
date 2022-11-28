@@ -12,7 +12,7 @@ const BookedTrue = ({
   //   console.log(bookedBike);
 
   let matchedPost;
-
+console.log("its active true");
   return (
     <>
       {bookedBikes.map((bike, idx) => {

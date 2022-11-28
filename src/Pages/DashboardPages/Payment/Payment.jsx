@@ -6,6 +6,7 @@ import { Elements } from "@stripe/react-stripe-js";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 
+
 const Payment = () => {
   const { state } = useLocation();
 

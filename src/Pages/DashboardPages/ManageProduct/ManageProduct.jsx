@@ -26,7 +26,7 @@ const ManageProduct = () => {
     axios
       .get(`http://localhost:5000/singlesellerposts?email=${user.email}`)
       .then((res) => {
-        setPosts(res.data);
+        setPosts(res.data.sellerPosts);
         setRefresh(false);
         setloader(false);
       });
@@ -97,6 +97,7 @@ const ManageProduct = () => {
 
   // array of bikes sold
   const bookedBikes = data.bookedBikes;
+  console.log(posts);
   console.log(bookedBikes);
   return (
     <div className="w-[98%] mx-auto">
@@ -118,7 +119,7 @@ const ManageProduct = () => {
           </thead>
 
           <>
-            {bookedBikes.length && (
+            {bookedBikes.length && !posts.length && (
               <BookedTrue
                 bookedBikes={bookedBikes}
                 posts={posts}
@@ -128,7 +129,7 @@ const ManageProduct = () => {
               />
             )}
 
-            {!bookedBikes.length && (
+            {posts.length && (
               <BookedFalse
                 bookedBikes={bookedBikes}
                 posts={posts}

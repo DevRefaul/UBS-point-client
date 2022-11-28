@@ -50,19 +50,19 @@ const PaymentForm = ({ data }) => {
     }
 
     // Use your card Element with other Stripe.js APIs
-    const { error } = await stripe.createPaymentMethod({
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: card,
     });
 
     if (error) {
-      return setCardErr(error.message);
+      setCardErr(error.message);
     } else {
       setCardErr("");
     }
 
     const { paymentIntent, error: paymentError } =
-      await stripe.confirmCardPayment(`${clientSecret}`, {
+      await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: card,
           billing_details: {
@@ -77,7 +77,6 @@ const PaymentForm = ({ data }) => {
       setCardErr("");
     }
 
-    setLoading(true);
     if (paymentIntent.id) {
       const res = await fetch("http://localhost:5000/updateProductPayment", {
         method: "PATCH",
@@ -94,6 +93,7 @@ const PaymentForm = ({ data }) => {
         totalPrice: data.bikeInfo.askingPrice,
         buyerEmail: data.bookerEmail,
         buyerName: data.buyerName,
+        transactionId: paymentIntent.id,
       };
 
       if (paymentResponse.updatedPaymentResponse.modifiedCount > 0) {
