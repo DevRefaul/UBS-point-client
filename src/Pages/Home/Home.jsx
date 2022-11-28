@@ -5,6 +5,7 @@ import Error from "../Error/Error";
 import Categorys from "./Categorys/Categorys";
 import ClientFeedback from "./ClientFeedback/ClientFeedback";
 import ContactSection from "./ContactSection/ContactSection";
+import PromotedPost from "./PromotedPost/PromotedPost";
 import Slider from "./Slider/Slider";
 import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
 
@@ -27,6 +28,8 @@ const Home = () => {
     },
   });
 
+  console.log();
+
   if (isLoading) {
     return <Loading />;
   }
@@ -43,6 +46,12 @@ const Home = () => {
     <div className="">
       <Slider />
       <Categorys brands={brands} />
+      {data?.bikes.map((bike) => {
+        const promotedBike = bike?.advertise === "true";
+        if (promotedBike) {
+          return <PromotedPost bike={bike} />;
+        }
+      })}
       <WhyChooseUs />
       <ContactSection />
       <ClientFeedback />

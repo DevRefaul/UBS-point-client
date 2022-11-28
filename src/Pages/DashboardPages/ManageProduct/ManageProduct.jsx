@@ -109,8 +109,7 @@ const ManageProduct = () => {
 
   // array of bikes sold
   const bookedBikes = data.bookedBikes;
-  console.log(posts);
-  console.log(bookedBikes);
+
   return (
     <div className="w-[98%] mx-auto">
       <h2 className="text-3xl font-semibold text-center py-4">All Posts</h2>
