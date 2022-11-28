@@ -19,11 +19,17 @@ const ReportModal = ({ bike }) => {
     const reportedInfo = { reporter, reported, reportedPost, message };
     console.log(reportedInfo);
 
-    const res = await fetch(`http://localhost:5000/report`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(reportedInfo),
-    });
+    const res = await fetch(
+      ` https://ubs-point-server-side.vercel.app/report`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(reportedInfo),
+      }
+    );
     const data = await res.json();
     console.log(data);
     if (data.reported.acknowledged) {

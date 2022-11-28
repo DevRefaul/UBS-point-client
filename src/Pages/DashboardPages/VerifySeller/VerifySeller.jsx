@@ -16,10 +16,19 @@ const VerifySeller = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`http://localhost:5000/user?email=${user?.email}`).then((res) => {
-      setSeller(res?.data);
-      setLoading(false);
-    });
+    axios
+      .get(
+        ` https://ubs-point-server-side.vercel.app/user?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+      .then((res) => {
+        setSeller(res?.data);
+        setLoading(false);
+      });
   }, [user?.email]);
 
   if (loading) {
@@ -52,9 +61,12 @@ const VerifySeller = () => {
           };
 
           // now this data will ben sent on server
-          fetch("http://localhost:5000/applyverify", {
+          fetch(" https://ubs-point-server-side.vercel.app/applyverify", {
             method: "POST",
-            headers: { "content-type": "application/json" },
+            headers: {
+              "content-type": "application/json",
+              authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            },
             body: JSON.stringify(userInfo),
           })
             .then((res) => res.json())

@@ -19,7 +19,14 @@ const AddProduct = () => {
   const { data: userDetails, isLoading } = useQuery({
     queryKey: ["sellpost"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/user?email=${user.email}`);
+      const res = await fetch(
+        ` https://ubs-point-server-side.vercel.app/user?email=${user.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },
@@ -102,11 +109,17 @@ const AddProduct = () => {
   };
 
   const makePost = async (postInfo) => {
-    const res = await fetch("http://localhost:5000/makepost", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(postInfo),
-    });
+    const res = await fetch(
+      " https://ubs-point-server-side.vercel.app/makepost",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(postInfo),
+      }
+    );
     const postResponse = await res.json();
 
     if (postResponse.postResponse.insertedId) {

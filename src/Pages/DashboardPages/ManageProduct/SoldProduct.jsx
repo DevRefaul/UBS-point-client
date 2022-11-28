@@ -11,7 +11,12 @@ const SoldProduct = () => {
     queryKey: ["soldBikes"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/sellersoldbikes?email=${user.email}`
+        ` https://ubs-point-server-side.vercel.app/sellersoldbikes?email=${user.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
       );
       const soldBikes = res.json();
       return soldBikes;

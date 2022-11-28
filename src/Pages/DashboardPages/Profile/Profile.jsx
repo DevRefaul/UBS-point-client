@@ -12,7 +12,14 @@ const Profile = () => {
   const { data: userDetails, isLoading } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/user?email=${user.email}`);
+      const res = await fetch(
+        ` https://ubs-point-server-side.vercel.app/user?email=${user.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },
@@ -69,11 +76,17 @@ const Profile = () => {
   const handleUpdateUserInDB = async (name) => {
     const userInfo = { email: user.email, name };
 
-    const res = await fetch("http://localhost:5000/updatename", {
-      method: "PATCH",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(userInfo),
-    });
+    const res = await fetch(
+      " https://ubs-point-server-side.vercel.app/updatename",
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(userInfo),
+      }
+    );
     const data = await res.json();
     if (data.updateName.matchedCount) {
       toast.success("Name updated in Database");

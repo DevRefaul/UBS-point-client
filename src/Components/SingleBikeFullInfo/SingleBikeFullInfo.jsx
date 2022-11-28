@@ -24,7 +24,14 @@ const SingleBikeFullInfo = () => {
       if (!id) {
         return <Loading />;
       }
-      const res = await fetch(`http://localhost:5000/bikes/${id}`);
+      const res = await fetch(
+        ` https://ubs-point-server-side.vercel.app/bikes/${id}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },
@@ -44,7 +51,14 @@ const SingleBikeFullInfo = () => {
   } = useQuery({
     queryKey: ["email"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/user?email=${userEmail}`);
+      const res = await fetch(
+        ` https://ubs-point-server-side.vercel.app/user?email=${userEmail}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },

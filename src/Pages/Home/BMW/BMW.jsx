@@ -8,7 +8,14 @@ const BMW = () => {
   const { isLoading, data, error } = useQuery({
     queryKey: ["bmw"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/bikes?brandName=bmw");
+      const res = await fetch(
+        " https://ubs-point-server-side.vercel.app/bikes?brandName=bmw",
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
       const data = res.json();
       return data;
     },

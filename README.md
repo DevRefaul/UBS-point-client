@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# Website Name : UBS Point
+# Live website Link : https://usb-point.web.app/home
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# About UBS Point Website
+UBS Point is a second hand bike selling website where users can buy bike . sellers can sell their bike via posting. An user can book a bike for review and after the booking others can't show that bike details. If the user cancelled the booking then everyone can see the details again. Sellers can promote their post , delete their posts and change the availability of their post.  Seller can verify them by nid.
+A user can report a post to admin. Admin will review the post and can delete the post. Admin can delete a user or seller.
 
-## Available Scripts
+# Features : Features are written below
 
-In the project directory, you can run:
+# Buy Sell
+* All users sellers and admins can update their profile
+* User can buy a bike or book a bike  even can report a post to admin
+* User can pay bike price by stripe payment method
+* Seller can post bike . can delete the post change availability of bike even can promote bike post
+* Only admin can see all users, all sellers ,reported bikes , verify sellers
 
-### `npm start`
+# Authentication
+* Signin user
+* Register new user
+* Logout user
+* Password Reset
+* Login with Google, Github accounts
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Slider on the top of the website
+* Category images slider with splider.js on the top of the website
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Full Screen Image on clicking post images
+* When ever a user click on the post image thte post image will be on full screen mode.
+ user can change his review about a post on myreview page
 
-### `npm test`
+# Environment Variables
+* Envireonment variable are used to hide the secret informations
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Complex footer
+* A complex footer is beign used in the bottom of the page . It inclued some navigation of courses and main menus. There is also a logo and social icons
 
-### `npm run build`
+# Blogs
+* A blog page is there for some blogs
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# List of Frameworks and Libraries used in this Website
+* For main website **React** is being used
+* **react-router-dom** is used for navigation
+* **React Query and Axios** is used for fetching data
+* **React icons** is used for icons
+* **React Stripe** is used for payments
+* **React Photo View** is used for show images in full screen
+* **splider.js** is used for all sliders
+* For css librarie used **Tailwind** css and for component librarie **daisyUI** is beign used
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Hosting
+* For Authentication and Hosting **Firebase** is used
+* For Server side hosting **vercel.com** is used
+* Images are hosted in **imgbb.com**

@@ -8,7 +8,14 @@ const ReportedProducts = () => {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["reported"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/reported");
+      const res = await fetch(
+        " https://ubs-point-server-side.vercel.app/reported",
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },
@@ -17,9 +24,12 @@ const ReportedProducts = () => {
   const handleDelete = async (id, _id) => {
     console.log(id);
     const res = await fetch(
-      `http://localhost:5000/deletepost?reportedpost=${id}&reportedqueue=${_id}`,
+      ` https://ubs-point-server-side.vercel.app/deletepost?reportedpost=${id}&reportedqueue=${_id}`,
       {
         method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
       }
     );
     const data = await res.json();

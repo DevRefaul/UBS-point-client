@@ -45,11 +45,17 @@ const BookingModal = ({ bike, refetch }) => {
       postId,
     };
 
-    const res = await fetch("http://localhost:5000/booked", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(bookingInfo),
-    });
+    const res = await fetch(
+      " https://ubs-point-server-side.vercel.app/booked",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(bookingInfo),
+      }
+    );
     const bookingResponse = await res.json();
 
     if (bookingResponse.bookingInfo.insertedId) {

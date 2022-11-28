@@ -94,9 +94,12 @@ const Login = () => {
 
   // creating user in database
   const handleCreateUserInDB = (user) => {
-    fetch("http://localhost:5000/adduser", {
+    fetch(" https://ubs-point-server-side.vercel.app/adduser", {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
@@ -106,7 +109,11 @@ const Login = () => {
 
   // get user token
   const getToken = (email) => {
-    fetch(`http://localhost:5000/jwt?email=${email}`)
+    fetch(` https://ubs-point-server-side.vercel.app/jwt?email=${email}`, {
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data?.accessToken) {

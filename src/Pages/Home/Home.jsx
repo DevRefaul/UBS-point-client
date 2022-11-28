@@ -14,7 +14,14 @@ const Home = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["category"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/bikes");
+      const res = await fetch(
+        " https://ubs-point-server-side.vercel.app/bikes",
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },

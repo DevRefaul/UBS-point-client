@@ -11,7 +11,14 @@ const AllUsers = () => {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["buyer"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/buyers");
+      const res = await fetch(
+        " https://ubs-point-server-side.vercel.app/buyers",
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },
@@ -28,9 +35,13 @@ const AllUsers = () => {
   const buyers = data.buyers;
 
   const handleDeleteBuyer = async (id) => {
-    const res = await fetch(`http://localhost:5000/deleteuser/${id}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      ` https://ubs-point-server-side.vercel.app/deleteuser/${id}`,
+      {
+        method: "DELETE",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      }
+    );
     const data = await res.json();
 
     if (data.deleteUser.deletedCount) {

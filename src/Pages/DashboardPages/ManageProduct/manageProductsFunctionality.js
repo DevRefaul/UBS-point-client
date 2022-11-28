@@ -3,9 +3,9 @@
 // this will let the post be promoted in home page;
 export const promote = async (id) => {
 
-    const res = await fetch(`http://localhost:5000/promotepost`, {
+    const res = await fetch(` https://ubs-point-server-side.vercel.app/promotepost`, {
         method: "PATCH",
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json", authorization: `bearer ${localStorage.getItem("accessToken")}` },
         body: JSON.stringify({ id })
     })
     const promoteResponse = await res.json()
@@ -14,8 +14,9 @@ export const promote = async (id) => {
 
 
 export const deletePost = async (id) => {
-    const res = await fetch(`http://localhost:5000/deletesellerpost/${id}`, {
-        method: "DELETE"
+    const res = await fetch(` https://ubs-point-server-side.vercel.app/deletesellerpost/${id}`, {
+        method: "DELETE",
+        headers: { authorization: `bearer ${localStorage.getItem("accessToken")}` }
     })
     const deleteResponse = await res.json()
     return deleteResponse
@@ -23,9 +24,9 @@ export const deletePost = async (id) => {
 
 
 export const updateProductAvailability = async (id, available) => {
-    const res = await fetch(`http://localhost:5000/updateProductAvalablity`, {
+    const res = await fetch(` https://ubs-point-server-side.vercel.app/updateProductAvalablity`, {
         method: "PATCH",
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json", authorization: `bearer ${localStorage.getItem("accessToken")}` },
         body: JSON.stringify({ id, available })
     })
     const updateProductResponse = await res.json()

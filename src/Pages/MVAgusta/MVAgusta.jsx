@@ -8,7 +8,14 @@ const MVAgusta = () => {
   const { isLoading, data, error } = useQuery({
     queryKey: ["mv"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/bikes?brandName=mv");
+      const res = await fetch(
+        " https://ubs-point-server-side.vercel.app/bikes?brandName=mv",
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
       const data = res.json();
       return data;
     },

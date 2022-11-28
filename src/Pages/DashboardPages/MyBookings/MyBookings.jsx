@@ -20,7 +20,12 @@ const MyBookings = () => {
     queryKey: ["sellerbookings"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/userbookings?email=${user.email}`
+        ` https://ubs-point-server-side.vercel.app/userbookings?email=${user.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
       );
       const bookedData = await res.json();
       return bookedData;
@@ -28,20 +33,32 @@ const MyBookings = () => {
   });
 
   const updatingBookingValue = async (id) => {
-    const res = await fetch(`http://localhost:5000/bikes/${id}`, {
-      method: "PATCH",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ isBooked: "false" }),
-    });
+    const res = await fetch(
+      ` https://ubs-point-server-side.vercel.app/bikes/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify({ isBooked: "false" }),
+      }
+    );
     const updateResponse = await res.json();
     return updateResponse;
   };
 
   const handleDeleteBooking = async (id, postId) => {
     setLoader(true);
-    const res = await fetch(`http://localhost:5000/deletebooking/${id}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      ` https://ubs-point-server-side.vercel.app/deletebooking/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    );
     const deleteResponse = await res.json();
 
     if (deleteResponse.deletedResponse.deletedCount > 0) {

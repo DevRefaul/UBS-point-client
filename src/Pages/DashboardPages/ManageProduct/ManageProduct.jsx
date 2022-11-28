@@ -24,7 +24,14 @@ const ManageProduct = () => {
   useEffect(() => {
     setloader(true);
     axios
-      .get(`http://localhost:5000/singlesellerposts?email=${user.email}`)
+      .get(
+        ` https://ubs-point-server-side.vercel.app/singlesellerposts?email=${user.email} `,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
       .then((res) => {
         setPosts(res.data.sellerPosts);
         setRefresh(false);
@@ -40,7 +47,12 @@ const ManageProduct = () => {
     queryKey: ["soldProducts"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/sellerBookedPosts?email=${user.email}`
+        ` https://ubs-point-server-side.vercel.app/sellerBookedPosts?email=${user.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
       );
       const posts = await res.json();
       return posts;

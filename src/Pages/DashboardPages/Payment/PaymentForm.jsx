@@ -20,9 +20,12 @@ const PaymentForm = ({ data }) => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch(" https://ubs-point-server-side.vercel.app/create-payment-intent", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
       body: JSON.stringify({ price }),
     })
       .then((res) => res.json())
@@ -78,9 +81,12 @@ const PaymentForm = ({ data }) => {
     }
 
     if (paymentIntent.id) {
-      const res = await fetch("http://localhost:5000/updateProductPayment", {
+      const res = await fetch(" https://ubs-point-server-side.vercel.app/updateProductPayment", {
         method: "PATCH",
-        headers: { "content-type": "application/json" },
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
         body: JSON.stringify({ productId }),
       });
       const paymentResponse = await res.json();
@@ -107,8 +113,11 @@ const PaymentForm = ({ data }) => {
 
   // deleting bike post fun after payment success
   const deletePostAfterSold = async (id) => {
-    const res = await fetch(`http://localhost:5000/deletesellerpost/${id}`, {
+    const res = await fetch(` https://ubs-point-server-side.vercel.app/deletesellerpost/${id}`, {
       method: "DELETE",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
     });
     const deleteResponse = await res.json();
     return;
@@ -116,9 +125,12 @@ const PaymentForm = ({ data }) => {
 
   // function for saving data in db
   const savePaymentInfoToDB = async (info) => {
-    const res = await fetch("http://localhost:5000/soldbikes", {
+    const res = await fetch(" https://ubs-point-server-side.vercel.app/soldbikes", {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
       body: JSON.stringify(info),
     });
     const savedResponse = await res.json();

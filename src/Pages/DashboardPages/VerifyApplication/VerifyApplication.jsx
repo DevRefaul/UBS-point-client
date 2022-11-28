@@ -14,7 +14,14 @@ const VerifyApplication = () => {
   } = useQuery({
     queryKey: ["verifyapplication"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/verifyapplication");
+      const res = await fetch(
+        " https://ubs-point-server-side.vercel.app/verifyapplication",
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },
@@ -31,11 +38,17 @@ const VerifyApplication = () => {
 
   // function for sending data in backend for verify seller
   const handleVerifySeller = async (email, id) => {
-    const res = await fetch("http://localhost:5000/verifyseller", {
-      method: "PATCH",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
+    const res = await fetch(
+      " https://ubs-point-server-side.vercel.app/verifyseller",
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify({ email }),
+      }
+    );
     const adminResponse = await res.json();
     if (adminResponse.verifiedSuccess.modifiedCount > 0) {
       toast.success("Verified Seller");
@@ -49,11 +62,17 @@ const VerifyApplication = () => {
   // function if verification is cancelled
   const handleVerifyCancel = async (email, id) => {
     console.log(email);
-    const res = await fetch("http://localhost:5000/cancelverify", {
-      method: "PATCH",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
+    const res = await fetch(
+      " https://ubs-point-server-side.vercel.app/cancelverify",
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify({ email }),
+      }
+    );
     const adminResponse = await res.json();
     console.log(adminResponse);
     if (adminResponse.verifiedSuccess.matchedCount > 0) {
@@ -66,9 +85,15 @@ const VerifyApplication = () => {
 
   // function for deleting application
   const deleteApplicationFromDB = async (id) => {
-    const res = await fetch(`http://localhost:5000/deleteapplication/${id}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      ` https://ubs-point-server-side.vercel.app/deleteapplication/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    );
     const deletedData = await res.json();
 
     console.log(deletedData);

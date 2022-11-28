@@ -31,7 +31,7 @@ const Categorys = ({ brands }) => {
       categorysInfo.push({
         name: "BMW",
         image: `${bmw}`,
-        to: "mv",
+        to: "bmw",
       });
     }
 
