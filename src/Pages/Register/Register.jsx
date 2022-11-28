@@ -32,13 +32,13 @@ const Register = () => {
 
     handleCreateUser(email, password)
       .then((data) => {
-        const user = data.user;
+        const user = data?.user;
         if (user?.uid) {
           handleUpdateUserInfo(userInfo)
             .then(() => {
               handleCreateUserInDB(userInfo);
-              navigate(from, { replace: true });
               toast.success("Successfully Created User");
+              getToken(user?.email);
             })
             .catch((err) => console.error(err.message));
         }
@@ -46,22 +46,22 @@ const Register = () => {
       .catch((err) => console.error(err.message));
   };
 
-
   // google login
   const handleGoogleLogin = () => {
     handleGoogleSignIn()
       .then((data) => {
-        const user = data.user;
+        const user = data?.user;
 
         if (user?.uid) {
           const userInfo = {
-            name: user.displayName,
-            email: user.email,
+            name: user?.displayName,
+            email: user?.email,
             role: "buyer",
           };
           // passing data to db function to save user in database
           handleCreateUserInDB(userInfo);
           toast.success("Successfully Logged In");
+          getToken(user?.email);
           setLoading(false);
         }
       })
@@ -75,13 +75,14 @@ const Register = () => {
         const user = data.user;
         if (user?.uid) {
           const userInfo = {
-            name: user.displayName,
-            email: user.email,
+            name: user?.displayName,
+            email: user?.email,
             role: "buyer",
           };
           // passing data to db function to save user in database
           handleCreateUserInDB(userInfo);
           toast.success("Successfully Logged In");
+          getToken(user?.email);
           setLoading(false);
         }
       })
@@ -99,6 +100,24 @@ const Register = () => {
       .then((data) => console.log(data))
       .catch((err) => console.error(err.message));
   };
+
+  // get user token
+  const getToken = (email) => {
+    fetch(`http://localhost:5000/jwt?email=${email}`, {
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.accessToken) {
+          localStorage.setItem("accessToken", data.accessToken);
+          navigate(from, { replace: true });
+        }
+      });
+  };
+
+
 
   return (
     <div>

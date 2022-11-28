@@ -33,30 +33,11 @@ const Login = () => {
         if (user?.uid) {
           navigate(from, { replace: true });
           toast.success("Successfully Logged In");
+          getToken(user?.email);
         }
       })
       .catch((err) => toast.error(err.message));
   };
-
-  // facebook login
-  // const handleFacebookLogin = () => {
-  //   handleFacebookSignIn()
-  //     .then((data) => {
-  //       const user = data.user;
-  //       if (user?.uid) {
-  //         const userInfo = {
-  //           name: user.displayName,
-  //           email: user.email,
-  //           role: "buyer",
-  //         };
-  //         handleCreateUserInDB(userInfo);
-  //         toast.success("Successfully Logged In");
-  //         setLoading(false);
-  //         navigate(from);
-  //       }
-  //     })
-  //     .catch((err) => toast.error(err.message));
-  // };
 
   // google login
   const handleGoogleLogin = () => {
@@ -65,12 +46,13 @@ const Login = () => {
         const user = data.user;
         if (user?.uid) {
           const userInfo = {
-            name: user.displayName,
-            email: user.email,
+            name: user?.displayName,
+            email: user?.email,
             role: "buyer",
           };
           handleCreateUserInDB(userInfo);
           toast.success("Successfully Logged In");
+          getToken(user?.email);
           setLoading(false);
           navigate(from);
         }
@@ -85,12 +67,13 @@ const Login = () => {
         const user = data.user;
         if (user?.uid) {
           const userInfo = {
-            name: user.displayName,
-            email: user.email,
+            name: user?.displayName,
+            email: user?.email,
             role: "buyer",
           };
           handleCreateUserInDB(userInfo);
           toast.success("Successfully Logged In");
+          getToken(user?.email);
           setLoading(false);
           navigate(from);
         }
@@ -119,6 +102,18 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => console.log(data))
       .catch((err) => console.error(err.message));
+  };
+
+  // get user token
+  const getToken = (email) => {
+    fetch(`http://localhost:5000/jwt?email=${email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.accessToken) {
+          localStorage.setItem("accessToken", data?.accessToken);
+          navigate(from, { replace: true });
+        }
+      });
   };
 
   return (
