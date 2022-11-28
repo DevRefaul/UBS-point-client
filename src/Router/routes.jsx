@@ -1,6 +1,7 @@
 import AdminRoute from "../AdminRoute/AdminRoute";
 import SingleBikeFullInfo from "../Components/SingleBikeFullInfo/SingleBikeFullInfo";
 import Blog from "../Pages/Blog/Blog";
+import BMW from "../Pages/BMW/BMW";
 import Contact from "../Pages/Contact/Contact";
 import AddProduct from "../Pages/DashboardPages/AddProduct/AddProduct";
 import AllSellers from "../Pages/DashboardPages/AllSellers/AllSellers";
@@ -15,7 +16,6 @@ import ReportedProducts from "../Pages/DashboardPages/ReportedProducts/ReportedP
 import VerifyApplication from "../Pages/DashboardPages/VerifyApplication/VerifyApplication";
 import VerifySeller from "../Pages/DashboardPages/VerifySeller/VerifySeller";
 import Error from "../Pages/Error/Error";
-import BMW from "../Pages/Home/BMW/BMW";
 import Home from "../Pages/Home/Home";
 import Honda from "../Pages/Honda/Honda";
 import Login from "../Pages/Login/Login";
