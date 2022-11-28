@@ -51,3 +51,8 @@ A user can report a post to admin. Admin will review the post and can delete the
 * For Authentication and Hosting **Firebase** is used
 * For Server side hosting **vercel.com** is used
 * Images are hosted in **imgbb.com**
+
+
+# Admin Email & Pass
+* admin-eamil : usbpoint@gmail.com
+* admin-pass : 123456
