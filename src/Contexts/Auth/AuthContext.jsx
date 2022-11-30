@@ -77,7 +77,7 @@ const AuthContext = ({ children }) => {
 
   // handleUpdateUser
     const handleUpdateUserInfo = (userInfo) => {
-      console.log(userInfo.name);
+
       setLoading(true);
       return updateProfile(auth.currentUser, {
         displayName: userInfo.name,

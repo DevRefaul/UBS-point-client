@@ -41,8 +41,9 @@ const Register = () => {
     handleCreateUser(email, password)
       .then((data) => {
         const user = data?.user;
+        console.log(data);
+        console.log(user);
         if (user?.uid) {
-          getToken(user?.email);
           handleCreateUserInDB(userInfo);
           handleUpdateUserInfo(userInfo)
             .then(() => {
@@ -58,7 +59,7 @@ const Register = () => {
   const handleGoogleLogin = () => {
     handleGoogleSignIn()
       .then((data) => {
-        const user = data?.user;
+        const user = data.user;
 
         if (user?.uid) {
           const userInfo = {
@@ -66,10 +67,8 @@ const Register = () => {
             email: user?.email,
             role: "buyer",
           };
-          // passing data to db function to save user in database
-          getToken(user?.email);
-          toast.success("Successfully Logged In");
           handleCreateUserInDB(userInfo);
+          toast.success("Successfully Logged In");
 
           setLoading(false);
         }
@@ -89,7 +88,7 @@ const Register = () => {
             role: "buyer",
           };
           // passing data to db function to save user in database
-          getToken(user?.email);
+
           toast.success("Successfully Logged In");
           handleCreateUserInDB(userInfo);
 
@@ -103,15 +102,13 @@ const Register = () => {
   const handleCreateUserInDB = (user) => {
     fetch(" https://ubs-point-server-side.vercel.app/adduser", {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
+      headers: { "content-type": "application/json" },
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        getToken(user?.email);
         navigate(from, { replace: true });
       })
       .catch((err) => console.error(err.message));
@@ -119,6 +116,7 @@ const Register = () => {
 
   // get user token
   const getToken = (email) => {
+    console.log(email);
     fetch(` https://ubs-point-server-side.vercel.app/jwt?email=${email}`)
       .then((res) => res.json())
       .then((data) => {

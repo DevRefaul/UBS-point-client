@@ -30,6 +30,7 @@ const Login = () => {
     handleLogIn(email, password)
       .then((data) => {
         const user = data.user;
+
         if (user?.uid) {
           getToken(user?.email);
           toast.success("Successfully Logged In");
@@ -44,13 +45,14 @@ const Login = () => {
     handleGoogleSignIn()
       .then((data) => {
         const user = data.user;
+
         if (user?.uid) {
           const userInfo = {
             name: user?.displayName,
             email: user?.email,
             role: "buyer",
           };
-          getToken(user?.email);
+
           handleCreateUserInDB(userInfo);
           toast.success("Successfully Logged In");
 
@@ -71,7 +73,6 @@ const Login = () => {
             email: user?.email,
             role: "buyer",
           };
-          getToken(user?.email);
           handleCreateUserInDB(userInfo);
           toast.success("Successfully Logged In");
 
@@ -94,17 +95,12 @@ const Login = () => {
 
   // creating user in database
   const handleCreateUserInDB = (user) => {
-    fetch(" https://ubs-point-server-side.vercel.app/adduser", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify(user),
-    })
+    console.log(user);
+    fetch(" https://ubs-point-server-side.vercel.app/adduser")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        getToken(user.email);
         navigate(from, { replace: true });
       })
       .catch((err) => console.error(err.message));
@@ -112,11 +108,7 @@ const Login = () => {
 
   // get user token
   const getToken = (email) => {
-    fetch(` https://ubs-point-server-side.vercel.app/jwt?email=${email}`, {
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(` https://ubs-point-server-side.vercel.app/jwt?email=${email}`)
       .then((res) => res.json())
       .then((data) => {
         if (data?.accessToken) {
