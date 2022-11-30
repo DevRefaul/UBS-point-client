@@ -31,9 +31,9 @@ const Login = () => {
       .then((data) => {
         const user = data.user;
         if (user?.uid) {
-          navigate(from, { replace: true });
-          toast.success("Successfully Logged In");
           getToken(user?.email);
+          toast.success("Successfully Logged In");
+          navigate(from, { replace: true });
         }
       })
       .catch((err) => toast.error(err.message));
@@ -50,11 +50,11 @@ const Login = () => {
             email: user?.email,
             role: "buyer",
           };
+          getToken(user?.email);
           handleCreateUserInDB(userInfo);
           toast.success("Successfully Logged In");
-          getToken(user?.email);
+
           setLoading(false);
-          navigate(from);
         }
       })
       .catch((err) => toast.error(err.message));
@@ -71,11 +71,11 @@ const Login = () => {
             email: user?.email,
             role: "buyer",
           };
+          getToken(user?.email);
           handleCreateUserInDB(userInfo);
           toast.success("Successfully Logged In");
-          getToken(user?.email);
+
           setLoading(false);
-          navigate(from);
         }
       })
       .catch((err) => toast.error(err.message));
@@ -103,7 +103,10 @@ const Login = () => {
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        navigate(from, { replace: true });
+      })
       .catch((err) => console.error(err.message));
   };
 
@@ -118,7 +121,6 @@ const Login = () => {
       .then((data) => {
         if (data?.accessToken) {
           localStorage.setItem("accessToken", data?.accessToken);
-          navigate(from, { replace: true });
         }
       });
   };

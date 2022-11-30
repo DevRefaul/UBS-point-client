@@ -42,8 +42,6 @@ const SingleBikeFullInfo = () => {
 
   const userEmail = user?.email;
 
-  console.log(singleBike);
-
   // passing email to server
 
   const {
@@ -67,19 +65,11 @@ const SingleBikeFullInfo = () => {
   });
 
   // loading and error state for loading bike data
-  if (isLoading) {
+  if (isLoading || userLoaing) {
     return <Loading />;
   }
 
-  if (error) {
-    return <Error />;
-  }
-
-  // loading and error state for loading user data
-  if (userLoaing) {
-    return <Loading />;
-  }
-  if (userError) {
+  if (error || userError) {
     return <Error />;
   }
 

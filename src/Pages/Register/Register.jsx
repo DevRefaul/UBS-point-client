@@ -42,11 +42,11 @@ const Register = () => {
       .then((data) => {
         const user = data?.user;
         if (user?.uid) {
+          getToken(user?.email);
           handleCreateUserInDB(userInfo);
           handleUpdateUserInfo(userInfo)
             .then(() => {
               toast.success("Successfully Created User");
-              getToken(user?.email);
             })
             .catch((err) => console.error(err.message));
         }
@@ -67,9 +67,10 @@ const Register = () => {
             role: "buyer",
           };
           // passing data to db function to save user in database
-          handleCreateUserInDB(userInfo);
-          toast.success("Successfully Logged In");
           getToken(user?.email);
+          toast.success("Successfully Logged In");
+          handleCreateUserInDB(userInfo);
+
           setLoading(false);
         }
       })
@@ -88,9 +89,10 @@ const Register = () => {
             role: "buyer",
           };
           // passing data to db function to save user in database
-          handleCreateUserInDB(userInfo);
-          toast.success("Successfully Logged In");
           getToken(user?.email);
+          toast.success("Successfully Logged In");
+          handleCreateUserInDB(userInfo);
+
           setLoading(false);
         }
       })
@@ -108,22 +110,20 @@ const Register = () => {
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        navigate(from, { replace: true });
+      })
       .catch((err) => console.error(err.message));
   };
 
   // get user token
   const getToken = (email) => {
-    fetch(` https://ubs-point-server-side.vercel.app/jwt?email=${email}`, {
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(` https://ubs-point-server-side.vercel.app/jwt?email=${email}`)
       .then((res) => res.json())
       .then((data) => {
         if (data?.accessToken) {
           localStorage.setItem("accessToken", data.accessToken);
-          navigate(from, { replace: true });
         }
       });
   };
