@@ -95,11 +95,9 @@ const Login = () => {
 
   // creating user in database
   const handleCreateUserInDB = (user) => {
-    console.log(user);
     fetch(" https://ubs-point-server-side.vercel.app/adduser")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         getToken(user.email);
         navigate(from, { replace: true });
       })

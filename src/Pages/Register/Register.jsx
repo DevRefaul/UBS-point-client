@@ -41,8 +41,6 @@ const Register = () => {
     handleCreateUser(email, password)
       .then((data) => {
         const user = data?.user;
-        console.log(data);
-        console.log(user);
         if (user?.uid) {
           handleCreateUserInDB(userInfo);
           handleUpdateUserInfo(userInfo)
@@ -107,7 +105,6 @@ const Register = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         getToken(user?.email);
         navigate(from, { replace: true });
       })
@@ -116,7 +113,6 @@ const Register = () => {
 
   // get user token
   const getToken = (email) => {
-    console.log(email);
     fetch(` https://ubs-point-server-side.vercel.app/jwt?email=${email}`)
       .then((res) => res.json())
       .then((data) => {
