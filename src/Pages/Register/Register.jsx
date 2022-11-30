@@ -26,17 +26,25 @@ const Register = () => {
     const email = form.email.value;
     const role = form.accountType.value;
     const password = form.password.value;
-    const sellerVerified = "false";
+    let sellerVerified;
+    if (role === "seller") {
+      sellerVerified = "false";
+    }
 
-    const userInfo = { name, email, role, sellerVerified };
+    let userInfo;
+    if (role === "seller") {
+      userInfo = { name, email, role, sellerVerified };
+    } else {
+      userInfo = { name, email, role };
+    }
 
     handleCreateUser(email, password)
       .then((data) => {
         const user = data?.user;
         if (user?.uid) {
+          handleCreateUserInDB(userInfo);
           handleUpdateUserInfo(userInfo)
             .then(() => {
-              handleCreateUserInDB(userInfo);
               toast.success("Successfully Created User");
               getToken(user?.email);
             })

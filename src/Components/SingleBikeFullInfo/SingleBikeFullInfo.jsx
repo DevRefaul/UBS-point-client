@@ -42,6 +42,8 @@ const SingleBikeFullInfo = () => {
 
   const userEmail = user?.email;
 
+  console.log(singleBike);
+
   // passing email to server
 
   const {
@@ -73,6 +75,14 @@ const SingleBikeFullInfo = () => {
     return <Error />;
   }
 
+  // loading and error state for loading user data
+  if (userLoaing) {
+    return <Loading />;
+  }
+  if (userError) {
+    return <Error />;
+  }
+
   const {
     sellerName,
     sellerMail,
@@ -90,15 +100,7 @@ const SingleBikeFullInfo = () => {
     imageURL,
     postedOn,
     available,
-  } = singleBike.bike;
-
-  // loading and error state for loading user data
-  if (userLoaing) {
-    return <Loading />;
-  }
-  if (userError) {
-    return <Error />;
-  }
+  } = singleBike?.bike;
 
   const userInfo = data;
   const { role } = userInfo.result;
