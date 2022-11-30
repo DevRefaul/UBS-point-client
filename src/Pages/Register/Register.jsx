@@ -48,7 +48,7 @@ const Register = () => {
             .then(() => {
               toast.success("Successfully Created User");
             })
-            .catch((err) => console.error(err.message));
+            .catch((err) => toast.error(err.message));
         }
       })
       .catch((err) => console.error(err.message));
@@ -74,7 +74,7 @@ const Register = () => {
           setLoading(false);
         }
       })
-      .catch((err) => console.error(err.message));
+      .catch((err) => toast.error(err.message));
   };
 
   // github login
@@ -96,7 +96,7 @@ const Register = () => {
           setLoading(false);
         }
       })
-      .catch((err) => console.error(err.message));
+      .catch((err) => toast.error(err.message));
   };
 
   // creating user in database
