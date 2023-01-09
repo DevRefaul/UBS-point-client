@@ -56,7 +56,7 @@ const Slider = () => {
               </h2>
               <div className="flex justify-center my-4">
                 <Link to={`/${slide.name}`}>
-                  <button className="px-6 py-2 font-bold bg-green-400 text-white rounded ml-4 border-2 border-transparent hover:bg-transparent hover:text-green-500 hover:border-green-500">
+                  <button className="px-6 py-2 font-bold bg-green-400 text-white rounded ml-4 border-2 border-transparent t hover:text-green-500 hover:border-green-500 hover:bg-[rgba(255,255,255,0.1)]">
                     Buy Now
                   </button>
                 </Link>
