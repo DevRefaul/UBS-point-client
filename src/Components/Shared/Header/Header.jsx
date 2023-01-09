@@ -9,7 +9,7 @@ const Header = () => {
   const { user, handleSignOut } = useContext(Authentication);
 
   return (
-    <div className=" bg-slate-100 sticky top-0 py-1 z-50">
+    <div className=" bg-slate-200 sticky top-0 py-1 z-50">
       <div className="navbar w-[90%] md:w-[80%] mx-auto ">
         <div className="navbar-start">
           <div className="dropdown">
