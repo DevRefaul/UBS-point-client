@@ -21,7 +21,7 @@ const SingleBikeCard = ({ bike }) => {
     } = bike;
 
     return (
-      <div>
+      <div className="h-full">
         <div className="card card-compact w-full h-full bg-base-100 shadow-xl">
           <figure>
             <PhotoProvider>

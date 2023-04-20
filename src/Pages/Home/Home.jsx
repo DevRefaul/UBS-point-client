@@ -8,6 +8,7 @@ import ContactSection from "./ContactSection/ContactSection";
 import PromotedPost from "./PromotedPost/PromotedPost";
 import Slider from "./Slider/Slider";
 import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
+import Bikes from "./Bikes/Bikes";
 
 const Home = () => {
   // const [bikeBrands, setBikeBrands] = useState([]);
@@ -27,8 +28,6 @@ const Home = () => {
       return data;
     },
   });
-
-  console.log();
 
   if (isLoading) {
     return <Loading />;
@@ -53,6 +52,7 @@ const Home = () => {
         }
       })}
       <WhyChooseUs />
+      <Bikes bikes={data.bikes} />
       <ContactSection />
       <ClientFeedback />
     </div>
