@@ -4,7 +4,7 @@ import { SplideSlide, Splide } from "@splidejs/react-splide";
 
 const Bikes = ({ bikes }) => {
   return (
-    <section className="py-8">
+    <section className="py-8 container mx-auto">
       <h2 className="text-2xl font-semibold my-4 text-center">Recent Bikes</h2>
 
       <div>
