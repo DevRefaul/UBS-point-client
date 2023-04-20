@@ -47,9 +47,7 @@ const Home = () => {
       <Categorys brands={brands} />
       {data?.bikes.map((bike) => {
         const promotedBike = bike?.advertise === "true";
-        if (promotedBike) {
-          return <PromotedPost bike={bike} />;
-        }
+        return promotedBike && <PromotedPost bike={bike} />;
       })}
       <WhyChooseUs />
       <Bikes bikes={data.bikes} />
